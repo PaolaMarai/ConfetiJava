@@ -5,7 +5,7 @@
  */
 package serverconfetti;
 
-public class ServerConfetti{
+public class ServerConfetti {
 
     /**
      * @param args the command line arguments

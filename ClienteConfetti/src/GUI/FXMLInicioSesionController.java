@@ -48,21 +48,4 @@ public class FXMLInicioSesionController implements Initializable {
         // TODO
     }    
     
-    @FXML
-	public void entrar() {
-
-		Stage stage = new Stage();
-		try {
-			Parent root = FXMLLoader.load(getClass().getResource("ConfetiPrincipal.fxml"));
-			Scene scene = new Scene(root);
-                      
-			stage.setScene(scene);
-
-			stage.show();
-
-		} catch (IOException ex) {
-			Logger.getLogger(FXMLInicioSesionController.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
-    
 }

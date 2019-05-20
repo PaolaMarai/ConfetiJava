@@ -22,7 +22,7 @@ import javax.swing.SwingUtilities;
  *
  * @author JET
  */
-public class Cliente extends Application{
+public class Cliente extends Application {
 
     private static final int PORT = 3333;
     private static final String NAMESERVICE = "ConfettiServer";
@@ -42,30 +42,30 @@ public class Cliente extends Application{
             System.err.println("Error en: " + ex.getMessage());
         }
     }
-    
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-       Parent root = FXMLLoader.load(getClass().getResource("FXMLInicioSesion.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/FXMLInicioSesion.fxml"));
 
-		Scene scene = new Scene(root);
+        Scene scene = new Scene(root);
 
-		primaryStage.setScene(scene);
-		primaryStage.show();
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
-    
-    public Cliente() throws RemoteException{
+
+    public Cliente() throws RemoteException {
         javaRMI();
     }
 
     public static void main(String[] args) {
+        launch(args);
         SwingUtilities.invokeLater(() -> {
             try {
                 new Cliente();
-                launch(args);
             } catch (RemoteException ex) {
                 System.err.println("Error en " + ex.getMessage());
             }
         });
     }
-   
+
 }
