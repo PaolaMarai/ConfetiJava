@@ -5,11 +5,7 @@
  */
 package serverconfetti;
 
-/**
- *
- * @author marai
- */
-public class ServerConfetti {
+public class ServerConfetti{
 
     /**
      * @param args the command line arguments
@@ -17,5 +13,5 @@ public class ServerConfetti {
     public static void main(String[] args) {
         // TODO code application logic here
     }
-    
+   
 }
