@@ -3,19 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package confetijava;
+package interfacesconfetti;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 
 /**
  *
  * @author marai
  */
-public class ConfetiJava {
-
-  /**
-   * @param args the command line arguments
-   */
-  public static void main(String[] args) {
-    // TODO code application logic here
-  }
-  
+public interface ICliente extends Remote{
+    public void iniciaProcesamiento() throws RemoteException;
 }
