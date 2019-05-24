@@ -1,11 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="476.0" prefWidth="762.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLEmisionController">
-    
+
+<AnchorPane id="AnchorPane" prefHeight="476.0" prefWidth="762.0" style="-fx-background-color: black;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="GUI.FXMLEmisionController">
+   <children>
+      <AnchorPane prefHeight="87.0" prefWidth="762.0" style="-fx-background-color: #343233;">
+         <children>
+            <Label layoutX="39.0" layoutY="26.0" prefHeight="27.0" prefWidth="118.0" text="Confetti" textFill="#3abb9b">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </Label>
+            <Button layoutX="482.0" layoutY="36.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #6108e6; -fx-background-radius: 10px;" text="Cerrar sesión" underline="true" />
+            <ImageView fitHeight="87.0" fitWidth="73.0" layoutX="628.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="105.0" prefHeight="200.0" prefWidth="762.0" style="-fx-background-color: #544242;">
+         <children>
+            <Label alignment="CENTER" layoutX="86.0" layoutY="70.0" prefHeight="130.0" prefWidth="591.0" text="Pregunta" textFill="#3abb9b">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <ProgressBar layoutY="14.0" prefHeight="18.0" prefWidth="762.0" progress="0.0" />
+         </children>
+      </AnchorPane>
+      <Button layoutX="105.0" layoutY="327.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="260.0" style="-fx-background-color: gray; -fx-background-radius: 15px;" text="Respuesta" textFill="#833090">
+         <font>
+            <Font name="Century" size="27.0" />
+         </font>
+      </Button>
+      <Button layoutX="425.0" layoutY="327.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="260.0" style="-fx-background-color: gray; -fx-background-radius: 15px;" text="Respuesta" textFill="#833090">
+         <font>
+            <Font name="Century" size="27.0" />
+         </font>
+      </Button>
+      <Button layoutX="105.0" layoutY="410.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="260.0" style="-fx-background-color: gray; -fx-background-radius: 15px;" text="Respuesta" textFill="#833090">
+         <font>
+            <Font name="Century" size="27.0" />
+         </font>
+      </Button>
+      <Button layoutX="425.0" layoutY="410.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="260.0" style="-fx-background-color: gray; -fx-background-radius: 15px;" text="Respuesta" textFill="#833090">
+         <font>
+            <Font name="Century" size="27.0" />
+         </font>
+      </Button>
+   </children>
 </AnchorPane>

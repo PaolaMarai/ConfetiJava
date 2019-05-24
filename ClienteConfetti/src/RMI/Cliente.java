@@ -45,11 +45,12 @@ public class Cliente extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/FXMLCountDown.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/FXMLCountDown.fxml"));
 
         Scene scene = new Scene(root);
 
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
