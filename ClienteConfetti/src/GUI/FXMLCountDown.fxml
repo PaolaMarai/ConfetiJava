@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="509.0" prefWidth="753.0" style="-fx-background-color: black;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="GUI.FXMLCountDownController">
+   <children>
+      <AnchorPane prefHeight="118.0" prefWidth="753.0" style="-fx-background-color: #4c4343;">
+         <children>
+            <Label layoutX="36.0" layoutY="21.0" text="Confetti" textFill="#48e7ff">
+               <font>
+                  <Font name="System Italic" size="53.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnSignOff" layoutX="467.0" layoutY="46.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="124.0" style="-fx-background-color: #6108e6;" text="Cerrar sesión">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="profilePic" fitHeight="94.0" fitWidth="80.0" layoutX="630.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="profilepic" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="110.0" layoutY="194.0" prefHeight="226.0" prefWidth="534.0" style="-fx-background-color: #341c1c; -fx-border-color: cyan;">
+         <children>
+            <Label layoutX="35.0" layoutY="14.0" style="-fx-background-color: #bcb9b9; -fx-background-radius: 15px;" text="00">
+               <font>
+                  <Font size="96.0" />
+               </font>
+            </Label>
+            <Label layoutX="215.0" layoutY="14.0" style="-fx-background-color: #bcb9b9; -fx-background-radius: 15px;" text="00">
+               <font>
+                  <Font size="96.0" />
+               </font>
+            </Label>
+            <Label layoutX="403.0" layoutY="14.0" style="-fx-background-color: #bcb9b9; -fx-background-radius: 15px;" text="00">
+               <font>
+                  <Font size="96.0" />
+               </font>
+            </Label>
+            <Label layoutX="164.0" layoutY="14.0" text=":" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="96.0" />
+               </font>
+            </Label>
+            <Label layoutX="349.0" layoutY="14.0" text=":" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="96.0" />
+               </font>
+            </Label>
+            <Label layoutX="210.0" layoutY="153.0" prefHeight="42.0" prefWidth="115.0" text="Minutos" textFill="#57ff1f">
+               <font>
+                  <Font name="System Italic" size="32.0" />
+               </font>
+            </Label>
+            <Label layoutX="398.0" layoutY="155.0" prefHeight="42.0" prefWidth="115.0" text="Segundos" textFill="#fbff04">
+               <font>
+                  <Font name="System Italic" size="27.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="42.0" layoutY="153.0" prefHeight="47.0" prefWidth="90.0" text="Horas" textFill="#00c8ff">
+               <font>
+                  <Font name="System Italic" size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
