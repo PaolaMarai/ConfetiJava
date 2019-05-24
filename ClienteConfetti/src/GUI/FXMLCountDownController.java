@@ -23,12 +23,13 @@ public class FXMLCountDownController implements Initializable {
 
   @FXML
   private Button btnSignOff;
-  @FXML
+  
   private Label remainingHours = new Label();
-  @FXML
+  
   private Label remainingMinutes = new Label();;
-  @FXML
+  
   private Label remainingSeconds = new Label();;
+   
 
   /**
    * Initializes the controller class.
