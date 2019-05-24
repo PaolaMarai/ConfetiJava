@@ -9,51 +9,48 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="background"  prefHeight="476.0" prefWidth="762.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLCountDownController">
+<AnchorPane id="AnchorPane" prefHeight="476.0" prefWidth="762.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLCountDownController">
    <children>
-      <AnchorPane prefHeight="104.0" prefWidth="762.0" style="-fx-background-color: #4c4343;" styleClass="mainPane">
+      <AnchorPane prefHeight="104.0" prefWidth="762.0" style="-fx-background-color: #4c4343;">
          <children>
-            <Button fx:id="btnSignOff" layoutX="495.0" layoutY="40.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #6108e6; -fx-background-radius: 10px;" text="Cerrar sesión" underline="true" />
             <Label layoutX="37.0" layoutY="26.0" text="Confetti" textFill="#4cb8ee">
                <font>
                   <Font name="Arial Italic" size="47.0" />
                </font>
             </Label>
-            <ImageView fitHeight="64.0" fitWidth="73.0" layoutX="637.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" styleClass="profilePicture">
-               <image>
-                  <Image url="" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="profilePic" fitHeight="76.0" fitWidth="73.0" layoutX="629.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="btnSignOff" layoutX="482.0" layoutY="36.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #6108e6; -fx-background-radius: 10px;" text="Cerrar sesión" underline="true" />
          </children>
       </AnchorPane>
-      <AnchorPane id="timerPane" layoutX="128.0" layoutY="169.0" prefHeight="234.0" prefWidth="529.0" style="-fx-background-color: #341c1c; -fx-border-color: cyan;" styleClass="timer">
+      
+      <AnchorPane layoutX="128.0" layoutY="169.0" prefHeight="234.0" prefWidth="529.0" style="-fx-background-color: #341c1c; -fx-border-color: cyan;">
          <children>
-            <Label id="timeLbl" fx:id="horas" alignment="CENTER" layoutX="64.0" layoutY="14.0" prefHeight="153.0" prefWidth="90.0" style="-fx-background-color: #bcb9b9; -fx-background-radius: 15px;" styleClass="timer" text="00" textAlignment="CENTER">
+            <Label fx:id="remainingHours" alignment="CENTER" layoutX="64.0" layoutY="14.0" prefHeight="153.0" prefWidth="90.0" style="-fx-background-color: #bcb9b9; -fx-background-radius: 15px;" text="00" textAlignment="CENTER">
                <font>
                   <Font size="78.0" />
                </font>
             </Label>
-            <Label id="timeLbl" fx:id="minutos" alignment="CENTER" layoutX="221.0" layoutY="14.0" prefHeight="153.0" prefWidth="90.0" style="-fx-background-color: #bcb9b9; -fx-background-radius: 15px;" styleClass="timer" text="00" textAlignment="CENTER">
+            <Label id="timeLbl" fx:id="remainingMinutes" alignment="CENTER" layoutX="221.0" layoutY="14.0" prefHeight="153.0" prefWidth="90.0" style="-fx-background-color: #bcb9b9; -fx-background-radius: 15px;" text="00" textAlignment="CENTER">
                <font>
                   <Font size="78.0" />
                </font>
             </Label>
-            <Label id="timeLbl" fx:id="segundos" alignment="CENTER" contentDisplay="CENTER" layoutX="378.0" layoutY="14.0" prefHeight="153.0" prefWidth="90.0" style="-fx-background-color: #bcb9b9; -fx-background-radius: 15px;" styleClass="timer"  text="00">
+            <Label fx:id="remainingSeconds" alignment="CENTER" contentDisplay="CENTER" layoutX="378.0" layoutY="14.0" prefHeight="153.0" prefWidth="90.0" style="-fx-background-color: #bcb9b9; -fx-background-radius: 15px;" text="00">
                <font>
                   <Font size="78.0" />
                </font>
             </Label>
-            <Label id="horasLabel" alignment="CENTER" layoutX="79.0" layoutY="178.0" prefHeight="35.0" prefWidth="60.0" text="Horas" textAlignment="CENTER" textFill="#5bc6ff">
+            <Label alignment="CENTER" layoutX="79.0" layoutY="178.0" prefHeight="35.0" prefWidth="60.0" text="Horas" textAlignment="CENTER" textFill="#5bc6ff">
                <font>
                   <Font name="System Bold Italic" size="19.0" />
                </font>
             </Label>
-            <Label id="minutosLabel" alignment="CENTER" layoutX="230.0" layoutY="173.0" prefHeight="46.0" prefWidth="73.0" text="Minutos" textAlignment="CENTER" textFill="#1fe44d">
+            <Label alignment="CENTER" layoutX="230.0" layoutY="173.0" prefHeight="46.0" prefWidth="73.0" text="Minutos" textAlignment="CENTER" textFill="#1fe44d">
                <font>
                   <Font name="System Bold Italic" size="19.0" />
                </font>
             </Label>
-            <Label id="segundosLabel" alignment="CENTER" layoutX="378.0" layoutY="178.0" prefHeight="35.0" prefWidth="90.0" text="Segundos" textAlignment="CENTER" textFill="#fffd00">
+            <Label alignment="CENTER" layoutX="378.0" layoutY="178.0" prefHeight="35.0" prefWidth="90.0" text="Segundos" textAlignment="CENTER" textFill="#fffd00">
                <font>
                   <Font name="System Bold Italic" size="19.0" />
                </font>

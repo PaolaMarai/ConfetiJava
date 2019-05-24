@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -23,12 +24,14 @@ public class FXMLCountDownController implements Initializable {
 
   @FXML
   private Button btnSignOff;
-  
-  private Label remainingHours = new Label();
-  
-  private Label remainingMinutes = new Label();;
-  
-  private Label remainingSeconds = new Label();;
+  @FXML
+  private ImageView profilePic;
+  @FXML
+  private Label remainingHours;
+  @FXML
+  private Label remainingMinutes;
+  @FXML
+  private Label remainingSeconds = new Label();
    
 
   /**
@@ -36,8 +39,8 @@ public class FXMLCountDownController implements Initializable {
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    String fecha = "2019/05/23 15:00:00";
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+    String fecha = "25/05/2019 15:00:00";
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
     Date next;
     try {
       next = sdf.parse(fecha);
