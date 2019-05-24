@@ -9,6 +9,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -32,19 +33,18 @@ public class FXMLCountDownController implements Initializable {
   private Label remainingMinutes;
   @FXML
   private Label remainingSeconds = new Label();
-   
 
   /**
    * Initializes the controller class.
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    String fecha = "25/05/2019 15:00:00";
+    String fecha = "24/05/2019 15:45:00";
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
     Date next;
     try {
       next = sdf.parse(fecha);
-      
+
       Timer timer = new Timer();
       TimerTask tarea = new TimerTask() {
 
@@ -56,11 +56,12 @@ public class FXMLCountDownController implements Initializable {
           int seconds = (int) Math.floor(now % 60);
           int minutes = (int) Math.floor(now / 60 % 60);
           int hours = (int) Math.floor(now / 3600 % 24);
-          remainingHours.setText(String.valueOf(hours));
-          remainingMinutes.setText(String.valueOf(minutes));
-          remainingSeconds.setText(String.valueOf(seconds));
+          Platform.runLater(() -> {
+            remainingHours.setText(String.valueOf(hours));
+            remainingMinutes.setText(String.valueOf(minutes));
+            remainingSeconds.setText(String.valueOf(seconds));
+          });
           System.out.println(hours + ":" + minutes + ":" + seconds);
-
         }
       };
 

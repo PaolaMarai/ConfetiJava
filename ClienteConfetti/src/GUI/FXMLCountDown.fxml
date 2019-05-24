@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="476.0" prefWidth="762.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLCountDownController">
+<AnchorPane id="AnchorPane" prefHeight="476.0" prefWidth="724.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLCountDownController">
    <children>
       <AnchorPane prefHeight="104.0" prefWidth="762.0" style="-fx-background-color: #4c4343;">
          <children>
