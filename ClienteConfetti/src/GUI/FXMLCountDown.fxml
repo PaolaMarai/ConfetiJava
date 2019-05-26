@@ -19,11 +19,6 @@
                   <Font name="Arial Italic" size="47.0" />
                </font>
             </Label>
-            <ImageView fitHeight="64.0" fitWidth="73.0" layoutX="637.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" styleClass="profilePicture">
-               <image>
-                  <Image url="" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane id="timerPane" layoutX="128.0" layoutY="169.0" prefHeight="234.0" prefWidth="529.0" style="-fx-background-color: #341c1c; -fx-border-color: cyan;" styleClass="timer">
