@@ -1,16 +1,16 @@
 CREATE TABLE Usuario (
-  "idUsuario" INT GENERATED ALWAYS AS IDENTITY NOT NULL,
-  "nombre" VARCHAR(60) NOT NULL,
-  "apellido" VARCHAR(60) NOT NULL,
-  "correo" VARCHAR(100) NOT NULL,
-  "clave" VARCHAR(500) NOT NULL,
-  "usuario" VARCHAR(45) NOT NULL,
-  "telefono" VARCHAR(10) NOT NULL,
-  "pin" VARCHAR(3) NOT NULL,
-  "autenticado" INT NOT NULL DEFAULT 0,
-  "isAdmin" INT NOT NULL DEFAULT 0,
+  idUsuario INT GENERATED ALWAYS AS IDENTITY NOT NULL,
+  nombre VARCHAR(60) NOT NULL,
+  apellido VARCHAR(60) NOT NULL,
+  correo VARCHAR(100) NOT NULL,
+  clave VARCHAR(500) NOT NULL,
+  usuario VARCHAR(45) NOT NULL,
+  telefono VARCHAR(10) NOT NULL,
+  pin VARCHAR(3) NOT NULL,
+  autenticado INT NOT NULL DEFAULT 0,
+  isAdmin INT NOT NULL DEFAULT 0,
 
-  PRIMARY KEY ("idUsuario"));
+  PRIMARY KEY (idUsuario));
 
 
 -- -----------------------------------------------------
@@ -18,27 +18,48 @@ CREATE TABLE Usuario (
 -- -----------------------------------------------------
 CREATE TABLE Pregunta (
   
-  "idPregunta" INT GENERATED ALWAYS AS IDENTITY  NOT NULL,
-  "pregunta" VARCHAR(150) NOT NULL,
-  "respuestaFalsa1" VARCHAR(100) NOT NULL,
-  "respuestaFalsa2" VARCHAR(100) NOT NULL,
-  "respuestaFalsa3" VARCHAR(100) NOT NULL,
-  "respuestaCorrecta" VARCHAR(100) NOT NULL,
+  idPregunta INT GENERATED ALWAYS AS IDENTITY  NOT NULL,
+  pregunta VARCHAR(150) NOT NULL,
+  respuestaFalsa1 VARCHAR(100) NOT NULL,
+  respuestaFalsa2 VARCHAR(100) NOT NULL,
+  respuestaFalsa3 VARCHAR(100) NOT NULL,
+  respuestaCorrecta VARCHAR(100) NOT NULL,
+  idEmision int NOT NULL,
 
-  PRIMARY KEY ("idPregunta"));
+  PRIMARY KEY (idPregunta)
+  FOREIGN KEY (idEmision) REFERENCES Emision(idEmision));
+
+INSERT INTO pregunta VALUES (
+DEFAULT,
+'¿Cuál es el mes de los reyes magos?',
+'Enero',
+'Mayo',
+'Agosto',
+'Enero',
+DEFAULT
+)
 
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Emision`
 -- -----------------------------------------------------
 CREATE TABLE Emision (
-  "idEmision" INT GENERATED ALWAYS AS IDENTITY NOT NULL,
-  "fecha" DATE NOT NULL,
-  "fechaFin" DATE NOT NULL,
-  "horaInicio" TIME NOT NULL,
-  "horaFin" TIME NOT NULL,
-  "enEmision" INT NOT NULL DEFAULT 0,
-  PRIMARY KEY ("idEmision"));
+  idEmision INT GENERATED ALWAYS AS IDENTITY NOT NULL,
+  fecha DATE NOT NULL,
+  fechaFin DATE NOT NULL,
+  horaInicio TIME NOT NULL,
+  horaFin TIME NOT NULL,
+  enEmision INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (idEmision));
+
+INSERT INTO emision VALUES (
+DEFAULT,
+'28/05/2019',
+'29/05/2019',
+'19:30:00',
+'19:50:00',
+0
+)
 
 
 -- -----------------------------------------------------

@@ -1,5 +1,7 @@
 package GUI;
 
+import interfacesconfetti.EmisionCRUD;
+import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,10 +13,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -32,44 +38,107 @@ public class FXMLCountDownController implements Initializable {
   @FXML
   private Label remainingMinutes;
   @FXML
-  private Label remainingSeconds = new Label();
+  private Label remainingSeconds;
+
+  @FXML
+  public void cargarPantallaEmision() {
+    Stage stage = new Stage();
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUI/FXMLEmision.fxml"));
+      Parent root = loader.load();
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setResizable(false);
+      stage.show();
+    } catch (IOException ex) {
+      Logger.getLogger(FXMLCountDownController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
+
+  @FXML
+  public void cargarPantallaIniciarSesion() {
+    Stage stage = new Stage();
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUI/FXMLInicioSesion.fxml"));
+      Parent root = loader.load();
+      Scene scene = new Scene(root);
+
+      stage.setScene(scene);
+      stage.setResizable(false);
+      stage.show();
+      closeButtonAction();
+    } catch (IOException ex) {
+      Logger.getLogger(FXMLCountDownController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
+
+  @FXML
+  private void closeButtonAction() {
+    Stage stage = (Stage) btnSignOff.getScene().getWindow();
+    stage.close();
+  }
+
+  private void doCountDown(Date proxima) {
+    Timer timer = new Timer();
+
+    TimerTask tarea = new TimerTask() {
+      @Override
+      public void run() {
+        long current = new Date().getTime();
+        int now = (int) ((proxima.getTime() - current + 1000) / 1000);
+        int seconds = (int) Math.floor(now % 60);
+        int minutes = (int) Math.floor(now / 60 % 60);
+        int hours = (int) Math.floor(now / 3600 % 24);
+        Platform.runLater(() -> {
+          if (hours == 0 && minutes == 0 && seconds == -1) {
+            timer.cancel();
+            cargarPantallaEmision();
+            closeButtonAction();
+          } else {
+            remainingHours.setText(String.valueOf(hours));
+            remainingMinutes.setText(String.valueOf(minutes));
+            remainingSeconds.setText(String.valueOf(seconds));
+          }
+        }
+        );
+      }
+    };
+    timer.schedule(tarea, 0, 1000);
+  }
+
+  /**
+   * Valida si hay una transmión actual para saber qué ventana mostrar cuando un usuario inicia
+   * sesión.
+   *
+   * @return El estado de la transmisión.
+   */
+  public boolean enEmision() {
+    if (EmisionCRUD.estadoEmision() == 1) {
+      return true;
+    }
+    return false;
+  }
+
+  private Date formatearFecha() {
+    String fechaString = EmisionCRUD.obtenerFechaSiguienteEmision();
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+    Date fecha;
+    try {
+      fecha = sdf.parse(fechaString);
+      return fecha;
+    } catch (ParseException ex) {
+      Logger.getLogger(FXMLCountDownController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return null;
+  }
 
   /**
    * Initializes the controller class.
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    String fecha = "24/05/2019 15:45:00";
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-    Date next;
-    try {
-      next = sdf.parse(fecha);
-
-      Timer timer = new Timer();
-      TimerTask tarea = new TimerTask() {
-
-        @Override
-        public void run() {
-
-          long current = new Date().getTime();
-          int now = (int) ((next.getTime() - current + 1000) / 1000);
-          int seconds = (int) Math.floor(now % 60);
-          int minutes = (int) Math.floor(now / 60 % 60);
-          int hours = (int) Math.floor(now / 3600 % 24);
-          Platform.runLater(() -> {
-            remainingHours.setText(String.valueOf(hours));
-            remainingMinutes.setText(String.valueOf(minutes));
-            remainingSeconds.setText(String.valueOf(seconds));
-          });
-          System.out.println(hours + ":" + minutes + ":" + seconds);
-        }
-      };
-
-      timer.schedule(tarea, 0, 1000);
-    } catch (ParseException ex) {
-      Logger.getLogger(FXMLCountDownController.class.getName()).log(Level.SEVERE, null, ex);
-    }
+    Date proximaEmision = formatearFecha();
+    doCountDown(proximaEmision);
 
   }
-
 }

@@ -58,12 +58,12 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
     }
 
     @Override
-    public void añadirEmision() throws RemoteException {
+    public void anadirEmision() throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void añadirPreguntas() throws RemoteException {
+    public void anadirPreguntas() throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

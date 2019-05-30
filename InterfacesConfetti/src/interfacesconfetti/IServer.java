@@ -16,6 +16,6 @@ public interface IServer extends Remote{
     public int registrarCallbackCliente(ICliente cliente)throws RemoteException;
     public void deregistrarCallbackCliente(ICliente cliente)throws RemoteException;
     public void notificarPuntaje(int puntaje, int idCliente)throws RemoteException;
-    public void añadirEmision()throws RemoteException;
-    public void añadirPreguntas()throws RemoteException;
+    public void anadirEmision()throws RemoteException;
+    public void anadirPreguntas()throws RemoteException;
 }
