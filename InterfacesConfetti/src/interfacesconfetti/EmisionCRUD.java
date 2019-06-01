@@ -26,7 +26,7 @@ public class EmisionCRUD {
     emFactory.close();
   }
 
-  public static String obtenerFechaSiguienteEmision() {
+  public static Emision obtenerProximaEmision() {
     emFactory = Persistence.createEntityManagerFactory("InterfacesConfettiPU");
     em = emFactory.createEntityManager();
     
@@ -34,28 +34,11 @@ public class EmisionCRUD {
     Query query = em.createQuery(queryString);
     List<Emision> proximaEmision = query.getResultList();
     
-    String fechaHora = "";
+    Emision proxima = null;
     for(Emision emision : proximaEmision) {
-      fechaHora = emision.getFecha() + " " + emision.getHorainicio();
+      proxima = emision;
     }
     
-    return fechaHora;
-  }
-  
-  public static int estadoEmision() {
-    emFactory = Persistence.createEntityManagerFactory("InterfacesConfettiPU");
-    em = emFactory.createEntityManager();
-    
-    String queryString = "SELECT e FROM Emision e";
-    Query query = em.createQuery(queryString);
-    List<Emision> emisiones = query.getResultList();
-    
-    Emision encontrada = new Emision(); 
-    int estado = 0;
-    for(Emision nueva : emisiones) {
-      estado = encontrada.getEnemision();
-    }
-    
-    return  estado;
+    return proxima;
   }
 }

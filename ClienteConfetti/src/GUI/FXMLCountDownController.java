@@ -1,5 +1,6 @@
 package GUI;
 
+import entitites.Emision;
 import interfacesconfetti.EmisionCRUD;
 import java.io.IOException;
 import java.net.URL;
@@ -113,18 +114,22 @@ public class FXMLCountDownController implements Initializable {
    * @return El estado de la transmisión.
    */
   public boolean enEmision() {
-    if (EmisionCRUD.estadoEmision() == 1) {
+    Emision emision = EmisionCRUD.obtenerProximaEmision();
+    
+    if (emision.getEnemision() == 1) {
       return true;
     }
     return false;
   }
 
   private Date formatearFecha() {
-    String fechaString = EmisionCRUD.obtenerFechaSiguienteEmision();
+    Emision proxima = EmisionCRUD.obtenerProximaEmision();
+    
+    String fechaHora = proxima.getFecha() + " " + proxima.getHorainicio();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
     Date fecha;
     try {
-      fecha = sdf.parse(fechaString);
+      fecha = sdf.parse(fechaHora);
       return fecha;
     } catch (ParseException ex) {
       Logger.getLogger(FXMLCountDownController.class.getName()).log(Level.SEVERE, null, ex);
