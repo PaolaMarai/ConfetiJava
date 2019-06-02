@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package interfacesconfetti;
 
+import entitites.Emision;
 import entitites.Pregunta;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -25,10 +21,12 @@ public class PreguntaCRUD {
     emFactory = Persistence.createEntityManagerFactory("InterfacesConfettiPU");
     em = emFactory.createEntityManager();
 
-    String queryString = "SELECT p FROM Emision e JOIN e.idEmision p";
+    Emision proximaEmision = EmisionCRUD.obtenerProximaEmision();
+    String queryString = "SELECT p FROM Pregunta p WHERE p.idemision = :idemision";
     Query query = em.createQuery(queryString);
+    query.setParameter("idemision", proximaEmision.getIdemision());
     List<Pregunta> resultados = query.getResultList();
-
+    System.out.println(resultados.getClass());
     return resultados;
   }
 
@@ -38,15 +36,14 @@ public class PreguntaCRUD {
     } else {
       List<Pregunta> preguntas = PreguntaCRUD.obtenerPreguntas();
       System.out.println(preguntas.size());
-      for (Pregunta p : preguntas) {
-        
+      for (int i = 0; i< preguntas.size(); i++) {        
         System.out.println(
-                p.getIdpregunta() + " "
-                + p.getPregunta() + " "
-                + p.getRespuestafalsa1() + " "
-                + p.getRespuestafalsa2() + " "
-                + p.getRespuestafalsa3() + " "
-                + p.getRespuestacorrecta()
+                preguntas.get(i).getIdpregunta() + " "
+                + preguntas.get(i).getPregunta() + " "
+                + preguntas.get(i).getRespuestafalsa1() + " "
+                + preguntas.get(i).getRespuestafalsa2() + " "
+                + preguntas.get(i).getRespuestafalsa3() + " "
+                + preguntas.get(i).getRespuestacorrecta()
         );
       }
     }

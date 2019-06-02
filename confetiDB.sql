@@ -26,8 +26,7 @@ CREATE TABLE Pregunta (
   respuestaCorrecta VARCHAR(100) NOT NULL,
   idEmision int NOT NULL,
 
-  PRIMARY KEY (idPregunta)
-  FOREIGN KEY (idEmision) REFERENCES Emision(idEmision));
+  PRIMARY KEY (idPregunta));
 
 INSERT INTO pregunta VALUES (
 DEFAULT,

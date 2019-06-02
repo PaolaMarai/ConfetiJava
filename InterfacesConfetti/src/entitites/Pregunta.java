@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
   , @NamedQuery(name = "Pregunta.findByRespuestafalsa1", query = "SELECT p FROM Pregunta p WHERE p.respuestafalsa1 = :respuestafalsa1")
   , @NamedQuery(name = "Pregunta.findByRespuestafalsa2", query = "SELECT p FROM Pregunta p WHERE p.respuestafalsa2 = :respuestafalsa2")
   , @NamedQuery(name = "Pregunta.findByRespuestafalsa3", query = "SELECT p FROM Pregunta p WHERE p.respuestafalsa3 = :respuestafalsa3")
-  , @NamedQuery(name = "Pregunta.findByRespuestacorrecta", query = "SELECT p FROM Pregunta p WHERE p.respuestacorrecta = :respuestacorrecta")})
+  , @NamedQuery(name = "Pregunta.findByRespuestacorrecta", query = "SELECT p FROM Pregunta p WHERE p.respuestacorrecta = :respuestacorrecta")
+  , @NamedQuery(name = "Pregunta.findByidEmision", query = "SELECT p FROM Pregunta p WHERE p.idemision = :idemision")})
 public class Pregunta implements Serializable {
 
   @OneToMany(mappedBy = "idpregunta")
