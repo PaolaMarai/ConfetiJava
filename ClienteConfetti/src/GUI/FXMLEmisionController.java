@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -83,23 +84,33 @@ public class FXMLEmisionController implements Initializable {
   private void countTime() {
     Timer timer = new Timer();
     TimerTask runTime = new TimerTask() {
-      double progress = 0;
+      double progress = 1;
       
       @Override
       public void run() {
-        lbPregunta.setText("");
-        firstAnswer.setText("");
-        secondAnswer.setText("");
-        thirdAnswer.setText("");
+//        lbPregunta.setText("");
+//        firstAnswer.setText("");
+//        secondAnswer.setText("");
+//        thirdAnswer.setText("");
+          System.out.println(progress);
         Platform.runLater(() -> {
-          progress += 0.001;
-          remaininTime.setProgress(progress);
+          if (progress <= 0) {
+            timer.cancel();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Se acabo el tiempo");
+            alert.setContentText("Pasar a la siguiiente pregunta");
+            alert.showAndWait();
+          } else {
+            progress -= 0.001;
+            remaininTime.setProgress(progress);
+          }
+          
         }
         );
       }
     };
     
-    timer.schedule(runTime, 0, 10);
+    timer.schedule(runTime, 1000, 10);
   }
 
   /**
@@ -108,7 +119,7 @@ public class FXMLEmisionController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     remaininTime.setStyle("-fx-accent: black;");
-    
+
 // TODO
     lbPregunta.setText("¿Tiene Beto ganas de ir a tomar?");
     firstAnswer.setText("Sí");

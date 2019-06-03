@@ -12,7 +12,17 @@ CREATE TABLE Usuario (
 
   PRIMARY KEY (idUsuario));
 
-
+-- -----------------------------------------------------
+-- Table `mydb`.`Emision`
+-- -----------------------------------------------------
+CREATE TABLE Emision (
+  idEmision INT GENERATED ALWAYS AS IDENTITY NOT NULL,
+  fecha varchar(10) NOT NULL,
+  fechaFin varchar(10) NOT NULL,
+  horaInicio varchar(8) NOT NULL,
+  horaFin varchar(9) NOT NULL,
+  enEmision INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (idEmision));
 -- -----------------------------------------------------
 -- Table `mydb`.`Pregunta`
 -- -----------------------------------------------------
@@ -26,76 +36,48 @@ CREATE TABLE Pregunta (
   respuestaCorrecta VARCHAR(100) NOT NULL,
   idEmision int NOT NULL,
 
-  PRIMARY KEY (idPregunta));
-
-INSERT INTO pregunta VALUES (
-DEFAULT,
-'Â¿CuÃ¡l es el mes de los reyes magos?',
-'Enero',
-'Mayo',
-'Agosto',
-'Enero',
-DEFAULT
-)
-
-
--- -----------------------------------------------------
--- Table `mydb`.`Emision`
--- -----------------------------------------------------
-CREATE TABLE Emision (
-  idEmision INT GENERATED ALWAYS AS IDENTITY NOT NULL,
-  fecha DATE NOT NULL,
-  fechaFin DATE NOT NULL,
-  horaInicio TIME NOT NULL,
-  horaFin TIME NOT NULL,
-  enEmision INT NOT NULL DEFAULT 0,
-  PRIMARY KEY (idEmision));
-
-INSERT INTO emision VALUES (
-DEFAULT,
-'28/05/2019',
-'29/05/2019',
-'19:30:00',
-'19:50:00',
-0
-)
-
-
--- -----------------------------------------------------
--- Table `mydb`.`Pregunta_has_Emision`
--- -----------------------------------------------------
-CREATE TABLE Pregunta_has_Emision (
-  "Pregunta_idPregunta" INT NOT NULL,
-  "Emision_idEmision" INT NOT NULL,
-  PRIMARY KEY ("Pregunta_idPregunta", "Emision_idEmision"),
-  CONSTRAINT "fk_Pregunta_has_Emision_Pregunta1"
-    FOREIGN KEY ("Pregunta_idPregunta")
-    REFERENCES Pregunta ("idPregunta")
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT "fk_Pregunta_has_Emision_Emision1"
-    FOREIGN KEY ("Emision_idEmision")
-    REFERENCES Emision ("idEmision")
+  PRIMARY KEY (idPregunta),
+  CONSTRAINT fk_Emision_has_Pregunta_Pregunta1
+    FOREIGN KEY (idEmision)
+    REFERENCES Emision (idEmision)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Participante`
 -- -----------------------------------------------------
 CREATE TABLE Participante (
-  "Usuario_idUsuario" INT NOT NULL,
-  "Emision_idEmision" INT NOT NULL,
-  "isWinner" INT NOT NULL DEFAULT 1,
-  "puntaje" INT NOT NULL DEFAULT 0,
-  PRIMARY KEY ("Usuario_idUsuario", "Emision_idEmision"),
-  CONSTRAINT "fk_Usuario_has_Emision_Usuario1"
-    FOREIGN KEY ("Usuario_idUsuario")
-    REFERENCES Usuario ("idUsuario")
+  Usuario_idUsuario INT NOT NULL,
+  Emision_idEmision INT NOT NULL,
+  isWinner INT NOT NULL DEFAULT 1,
+  puntaje INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (Usuario_idUsuario, Emision_idEmision),
+  CONSTRAINT fk_Usuario_has_Emision_Usuario1
+    FOREIGN KEY (Usuario_idUsuario)
+    REFERENCES Usuario (idUsuario)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT "fk_Usuario_has_Emision_Emision1"
-    FOREIGN KEY ("Emision_idEmision")
-    REFERENCES Emision ("idEmision")
+  CONSTRAINT fk_Usuario_has_Emision_Emision1
+    FOREIGN KEY (Emision_idEmision)
+    REFERENCES Emision (idEmision)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+INSERT INTO emision VALUES (
+ DEFAULT,
+ '03/06/2019',
+ '03/06/2019',
+ '17:00:00',
+ '19:00:00',
+ 0
+ );
+
+ INSERT INTO pregunta VALUES (
+ DEFAULT,
+ '¿Quién descubio la penicilina?',
+ 'Alexander Flemin',
+ 'Maluma',
+ 'Trump',
+ 'Alexander Flemin',
+ 1
+ );

@@ -6,7 +6,6 @@
 package entitites;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,10 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -36,12 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
   , @NamedQuery(name = "Pregunta.findByRespuestafalsa1", query = "SELECT p FROM Pregunta p WHERE p.respuestafalsa1 = :respuestafalsa1")
   , @NamedQuery(name = "Pregunta.findByRespuestafalsa2", query = "SELECT p FROM Pregunta p WHERE p.respuestafalsa2 = :respuestafalsa2")
   , @NamedQuery(name = "Pregunta.findByRespuestafalsa3", query = "SELECT p FROM Pregunta p WHERE p.respuestafalsa3 = :respuestafalsa3")
-  , @NamedQuery(name = "Pregunta.findByRespuestacorrecta", query = "SELECT p FROM Pregunta p WHERE p.respuestacorrecta = :respuestacorrecta")
-  , @NamedQuery(name = "Pregunta.findByidEmision", query = "SELECT p FROM Pregunta p WHERE p.idemision = :idemision")})
+  , @NamedQuery(name = "Pregunta.findByRespuestacorrecta", query = "SELECT p FROM Pregunta p WHERE p.respuestacorrecta = :respuestacorrecta")})
 public class Pregunta implements Serializable {
-
-  @OneToMany(mappedBy = "idpregunta")
-  private Collection<Emision> emisionCollection;
 
   private static final long serialVersionUID = 1L;
   @Id
@@ -163,15 +156,6 @@ public class Pregunta implements Serializable {
   @Override
   public String toString() {
     return "entitites.Pregunta[ idpregunta=" + idpregunta + " ]";
-  }
-
-  @XmlTransient
-  public Collection<Emision> getEmisionCollection() {
-    return emisionCollection;
-  }
-
-  public void setEmisionCollection(Collection<Emision> emisionCollection) {
-    this.emisionCollection = emisionCollection;
   }
   
 }

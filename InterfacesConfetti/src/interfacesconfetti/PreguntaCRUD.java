@@ -21,12 +21,9 @@ public class PreguntaCRUD {
     emFactory = Persistence.createEntityManagerFactory("InterfacesConfettiPU");
     em = emFactory.createEntityManager();
 
-    Emision proximaEmision = EmisionCRUD.obtenerProximaEmision();
-    String queryString = "SELECT p FROM Pregunta p WHERE p.idemision = :idemision";
-    Query query = em.createQuery(queryString);
-    query.setParameter("idemision", proximaEmision.getIdemision());
-    List<Pregunta> resultados = query.getResultList();
-    System.out.println(resultados.getClass());
+    Emision emision = EmisionCRUD.obtenerProximaEmision();
+    List<Pregunta> resultados = (List<Pregunta>)emision.getPreguntaCollection();
+    
     return resultados;
   }
 

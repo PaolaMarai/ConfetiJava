@@ -14,8 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -39,10 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
   , @NamedQuery(name = "Emision.findByHorafin", query = "SELECT e FROM Emision e WHERE e.horafin = :horafin")
   , @NamedQuery(name = "Emision.findByEnemision", query = "SELECT e FROM Emision e WHERE e.enemision = :enemision")})
 public class Emision implements Serializable {
-
-  @JoinColumn(name = "IDPREGUNTA", referencedColumnName = "IDPREGUNTA")
-  @ManyToOne
-  private Pregunta idpregunta;
 
   private static final long serialVersionUID = 1L;
   @Id
@@ -175,14 +169,6 @@ public class Emision implements Serializable {
   @Override
   public String toString() {
     return "entitites.Emision[ idemision=" + idemision + " ]";
-  }
-
-  public Pregunta getIdpregunta() {
-    return idpregunta;
-  }
-
-  public void setIdpregunta(Pregunta idpregunta) {
-    this.idpregunta = idpregunta;
   }
   
 }
