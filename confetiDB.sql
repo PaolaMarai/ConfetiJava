@@ -18,7 +18,7 @@ CREATE TABLE Usuario (
 -- -----------------------------------------------------
 CREATE TABLE Pregunta (
   
-  "idPregunta" INT GENERATED ALWAYS AS IDENTITY  NOT NULL,
+  "idPregunta" INT GENERATED ALWAYS AS IDENTITY NOT NULL DEFAULT 0,
   "pregunta" VARCHAR(150) NOT NULL,
   "respuestaFalsa1" VARCHAR(100) NOT NULL,
   "respuestaFalsa2" VARCHAR(100) NOT NULL,
@@ -40,24 +40,6 @@ CREATE TABLE Emision (
   "enEmision" INT NOT NULL DEFAULT 0,
   PRIMARY KEY ("idEmision"));
 
-
--- -----------------------------------------------------
--- Table `mydb`.`Pregunta_has_Emision`
--- -----------------------------------------------------
-CREATE TABLE Pregunta_has_Emision (
-  "Pregunta_idPregunta" INT NOT NULL,
-  "Emision_idEmision" INT NOT NULL,
-  PRIMARY KEY ("Pregunta_idPregunta", "Emision_idEmision"),
-  CONSTRAINT "fk_Pregunta_has_Emision_Pregunta1"
-    FOREIGN KEY ("Pregunta_idPregunta")
-    REFERENCES Pregunta ("idPregunta")
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT "fk_Pregunta_has_Emision_Emision1"
-    FOREIGN KEY ("Emision_idEmision")
-    REFERENCES Emision ("idEmision")
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
