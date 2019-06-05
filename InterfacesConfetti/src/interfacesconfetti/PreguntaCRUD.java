@@ -25,7 +25,7 @@ public class PreguntaCRUD {
     emFactory = Persistence.createEntityManagerFactory("InterfacesConfettiPU");
     em = emFactory.createEntityManager();
 
-    String queryString = "SELECT p FROM Emision e JOIN e.idEmision p";
+    String queryString = "SELECT p FROM Pregunta p";
     Query query = em.createQuery(queryString);
     List<Pregunta> resultados = query.getResultList();
 
