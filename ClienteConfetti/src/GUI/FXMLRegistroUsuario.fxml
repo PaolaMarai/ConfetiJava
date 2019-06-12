@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLRegistrarController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/registrar.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="300.0" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: black;">
+         <children>
+            <Label layoutX="31.0" layoutY="23.0" text="Registrate" textFill="#9b1ee4">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="38.0" layoutY="294.0" text="¿Ya tienes cuenta?" textFill="#9b1ee4" />
+            <TextField fx:id="txtNombre" layoutX="38.0" layoutY="67.0" prefHeight="25.0" prefWidth="231.0" promptText="Nombre(s)" />
+            <TextField fx:id="txtApellido" layoutX="38.0" layoutY="98.0" prefHeight="25.0" prefWidth="231.0" promptText="Apellido(s)" />
+            <TextField fx:id="txtUsuario" layoutX="38.0" layoutY="129.0" prefHeight="25.0" prefWidth="231.0" promptText="Usuario" />
+            <TextField fx:id="txtCorreo" layoutX="38.0" layoutY="160.0" prefHeight="25.0" prefWidth="231.0" promptText="Correo" />
+            <PasswordField fx:id="txtPassword" layoutX="38.0" layoutY="225.0" prefHeight="25.0" prefWidth="231.0" promptText="Contraseña" />
+            <PasswordField fx:id="txtPassword1" layoutX="38.0" layoutY="257.0" prefHeight="25.0" prefWidth="231.0" promptText="Repetir Contraseña" />
+            <Button fx:id="btnRegistrar" layoutX="186.0" layoutY="299.0" mnemonicParsing="false" onAction="#registroUsuario" style="-fx-border-radius: 15; -fx-background-color: BB33FF;" text="Registrar" textFill="WHITE" />
+            <Button fx:id="btnInicio" layoutX="44.0" layoutY="311.0" mnemonicParsing="false" style="-fx-background-color: none;" text="Iniciar Sesión" textFill="WHITE" />
+            <TextField fx:id="txtTelefono" layoutX="38.0" layoutY="190.0" prefHeight="25.0" prefWidth="231.0" promptText="Telefono" />
+            <Label fx:id="lblError" alignment="TOP_LEFT" layoutX="38.0" layoutY="343.0" prefHeight="47.0" prefWidth="231.0" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

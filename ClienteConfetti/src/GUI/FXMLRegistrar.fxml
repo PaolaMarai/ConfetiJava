@@ -19,7 +19,7 @@
       <AnchorPane layoutX="293.0" prefHeight="400.0" prefWidth="308.0" style="-fx-background-color: black;">
          <children>
             <PasswordField fx:id="txtPassword" layoutX="50.0" layoutY="203.0" prefHeight="25.0" prefWidth="208.0" promptText="Password" style="-fx-border-radius: 15;" />
-            <Button fx:id="btnRegistrar" onAction="#registrarUsuarioNuevo" layoutX="177.0" layoutY="277.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="81.0" style="-fx-background-color: BB33FF; -fx-border-radius: 15;" text="Registrar" />
+            <Button fx:id="btnRegistrar" layoutX="177.0" layoutY="277.0" mnemonicParsing="false" onAction="#validarUsuario" prefHeight="27.0" prefWidth="81.0" style="-fx-background-color: BB33FF; -fx-border-radius: 15;" text="Registrar" />
             <TextField fx:id="txtNombre" layoutX="50.0" layoutY="87.0" prefHeight="25.0" prefWidth="208.0" promptText="Nombre" style="-fx-border-radius: 15;" />
             <Label layoutX="51.0" layoutY="41.0" text="Registrate" textFill="#9b1ee4">
                <font>
@@ -32,6 +32,7 @@
             <TextField fx:id="txtApellido" layoutX="50.0" layoutY="116.0" prefHeight="25.0" prefWidth="208.0" promptText="Apellidos" style="-fx-border-radius: 15;" />
             <TextField fx:id="txtTelefono" layoutX="50.0" layoutY="145.0" prefHeight="25.0" prefWidth="208.0" promptText="Telefono" style="-fx-border-radius: 15;" />
             <TextField fx:id="txtCorreo" layoutX="50.0" layoutY="174.0" prefHeight="25.0" prefWidth="208.0" promptText="Correo" style="-fx-border-radius: 15;" />
+            <Label fx:id="lblError" layoutX="47.0" layoutY="318.0" prefHeight="58.0" prefWidth="214.0" textFill="WHITE" />
          </children>
       </AnchorPane>
       <AnchorPane opacity="0.0" prefHeight="400.0" prefWidth="293.0" style="-fx-background-color: black;" />
