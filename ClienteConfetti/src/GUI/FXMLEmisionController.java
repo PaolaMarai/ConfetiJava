@@ -1,10 +1,11 @@
 package GUI;
 
+import entitites.Pregunta;
+import interfacesconfetti.PreguntaCRUD;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -13,11 +14,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -27,7 +26,7 @@ import javafx.stage.Stage;
  * @author Ángel Sanchez
  */
 public class FXMLEmisionController implements Initializable {
-  
+
   @FXML
   private ImageView profilePic;
   @FXML
@@ -42,9 +41,13 @@ public class FXMLEmisionController implements Initializable {
   private ProgressBar remaininTime;
   @FXML
   private Label lbPregunta;
+  @FXML
+  private Label numeroPregunta;
+
+  private List<Pregunta> preguntas;
 
   /**
-   * Valida si la respuesta que dio el jugador es correcta.
+   * Valida si la respuesta que dió el jugador es correcta.
    *
    * @param answer Respuesta del jugador.
    * @param correctAnswer Respuesta guardada en la base de datos considerada correcta.
@@ -54,10 +57,9 @@ public class FXMLEmisionController implements Initializable {
     if (answer.equals(correctAnswer)) {
       return true;
     }
-    
     return false;
   }
-  
+
   @FXML
   public void cargarPantallaIniciarSesion() {
     Stage stage = new Stage();
@@ -65,7 +67,7 @@ public class FXMLEmisionController implements Initializable {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUI/FXMLInicioSesion.fxml"));
       Parent root = loader.load();
       Scene scene = new Scene(root);
-      
+
       stage.setScene(scene);
       stage.setResizable(false);
       stage.show();
@@ -74,43 +76,89 @@ public class FXMLEmisionController implements Initializable {
       Logger.getLogger(FXMLCountDownController.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
-  
+
   @FXML
   private void closeButtonAction() {
     Stage stage = (Stage) btnSignOff.getScene().getWindow();
     stage.close();
   }
+
+  @FXML
+  private void clickFirst() {
+    secondAnswer.setDisable(true);
+    thirdAnswer.setDisable(true);
+    String answer = firstAnswer.getText();
+    System.out.println(answer);
+  }
   
-  private void countTime() {
-    Timer timer = new Timer();
-    TimerTask runTime = new TimerTask() {
-      double progress = 1;
-      
-      @Override
-      public void run() {
-//        lbPregunta.setText("");
-//        firstAnswer.setText("");
-//        secondAnswer.setText("");
-//        thirdAnswer.setText("");
-          System.out.println(progress);
-        Platform.runLater(() -> {
-          if (progress <= 0) {
-            timer.cancel();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Se acabo el tiempo");
-            alert.setContentText("Pasar a la siguiiente pregunta");
-            alert.showAndWait();
-          } else {
-            progress -= 0.001;
-            remaininTime.setProgress(progress);
-          }
-          
+  @FXML
+  private void clickSecond() {
+    firstAnswer.setDisable(true);
+    thirdAnswer.setDisable(true);
+    String answer = secondAnswer.getText();
+    System.out.println(answer);
+  }
+  
+  @FXML
+  private void clickThird() {
+    firstAnswer.setDisable(true);
+    secondAnswer.setDisable(true);
+    String answer = thirdAnswer.getText();
+    System.out.println(answer);
+  }
+
+  private void startGame() {
+    Thread thread = new Thread(() -> {
+      int numeroPregunta = 1;
+      for (Pregunta p : preguntas) {
+        firstAnswer.setDisable(false);
+        secondAnswer.setDisable(false);
+        thirdAnswer.setDisable(false);
+        try {
+          setQuestion(p, numeroPregunta);
+          setRemainingTime(numeroPregunta);
+          Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+          Logger.getLogger(FXMLEmisionController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        );
+        numeroPregunta++;
       }
-    };
-    
-    timer.schedule(runTime, 1000, 10);
+      Platform.runLater(() -> {
+        lbPregunta.setText("El juego ha terminado.");
+      });
+    });
+    thread.start();
+  }
+
+  private void setQuestion(Pregunta p, int numeroPregunta) {
+    Platform.runLater(() -> {
+      this.numeroPregunta.setText(String.valueOf(numeroPregunta));
+      lbPregunta.setText(p.getPregunta());
+      firstAnswer.setText(p.getRespuestafalsa1());
+      secondAnswer.setText(p.getRespuestafalsa2());
+      thirdAnswer.setText(p.getRespuestafalsa3());
+    });
+  }
+
+  private void setRemainingTime(int numeroPregunta) {
+    double progress = 0;
+    for (int i = 0; i <= 1000; i++) {
+      try {
+        remaininTime.setProgress(progress);
+        progress += .001;
+        Thread.sleep(10);
+      } catch (InterruptedException ex) {
+        Logger.getLogger(FXMLEmisionController.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }
+    firstAnswer.setDisable(true);
+    secondAnswer.setDisable(true);
+    thirdAnswer.setDisable(true);
+    if (numeroPregunta < 3) {
+      Platform.runLater(() -> {
+        lbPregunta.setText("Cambiando a siguiente pregunta, espera un momento...");
+      });
+    }
   }
 
   /**
@@ -120,11 +168,8 @@ public class FXMLEmisionController implements Initializable {
   public void initialize(URL url, ResourceBundle rb) {
     remaininTime.setStyle("-fx-accent: black;");
 
-// TODO
-    lbPregunta.setText("¿Tiene Beto ganas de ir a tomar?");
-    firstAnswer.setText("Sí");
-    secondAnswer.setText("Quién sabe");
-    thirdAnswer.setText("No");
-    countTime();
+    preguntas = PreguntaCRUD.obtenerPreguntas();
+    startGame();
+
   }
 }

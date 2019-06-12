@@ -18,31 +18,10 @@ public class PreguntaCRUD {
   private static EntityManager em;
 
   public static List<Pregunta> obtenerPreguntas() {
-    emFactory = Persistence.createEntityManagerFactory("InterfacesConfettiPU");
-    em = emFactory.createEntityManager();
 
     Emision emision = EmisionCRUD.obtenerProximaEmision();
     List<Pregunta> resultados = (List<Pregunta>)emision.getPreguntaCollection();
     
     return resultados;
-  }
-
-  public static void main(String[] args) {
-    if (PreguntaCRUD.obtenerPreguntas().isEmpty()) {
-      System.out.println("No se encontrtaron resultados");
-    } else {
-      List<Pregunta> preguntas = PreguntaCRUD.obtenerPreguntas();
-      System.out.println(preguntas.size());
-      for (int i = 0; i< preguntas.size(); i++) {        
-        System.out.println(
-                preguntas.get(i).getIdpregunta() + " "
-                + preguntas.get(i).getPregunta() + " "
-                + preguntas.get(i).getRespuestafalsa1() + " "
-                + preguntas.get(i).getRespuestafalsa2() + " "
-                + preguntas.get(i).getRespuestafalsa3() + " "
-                + preguntas.get(i).getRespuestacorrecta()
-        );
-      }
-    }
   }
 }

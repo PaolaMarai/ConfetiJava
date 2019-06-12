@@ -5,6 +5,7 @@
  */
 package RMI;
 
+import entitites.Pregunta;
 import interfacesconfetti.ICliente;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -16,13 +17,25 @@ import java.util.List;
  */
 public class CallBackCliente extends UnicastRemoteObject implements ICliente {
 
-    public CallBackCliente() throws RemoteException {
-        super();
-    }
+  List<Pregunta> preguntas;
 
-    @Override
-    public void iniciaProcesamiento() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  public CallBackCliente() throws RemoteException {
+    super();
+  }
 
+
+  @Override
+  public void iniciarJuego() throws RemoteException {
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  }
+
+  @Override
+  public void setPregunta(Pregunta pregunta) throws RemoteException {
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  }
+
+  @Override
+  public void setRemainingTime(double remainingTime) throws RemoteException {
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  }
 }
