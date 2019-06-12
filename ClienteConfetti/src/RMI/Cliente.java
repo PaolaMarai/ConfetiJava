@@ -21,8 +21,8 @@ public class Cliente extends Application {
     private static final String NAMESERVICE = "ConfettiServer";
     private static final String HOSTNAMESERVER = "localhost";
 
-    private static IServer server;
-    private static CallBackCliente callBackCliente;
+    public static IServer server;
+    public static CallBackCliente callBackCliente;
 
     private void javaRMI() throws RemoteException {
         try {
@@ -38,6 +38,7 @@ public class Cliente extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         Parent root = FXMLLoader.load(getClass().getResource("../GUI/FXMLEmision.fxml"));
 
         Scene scene = new Scene(root);

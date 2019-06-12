@@ -28,6 +28,14 @@ CREATE TABLE Emision (
 -- -----------------------------------------------------
 CREATE TABLE Pregunta (
   
+<<<<<<< HEAD
+  "idPregunta" INT GENERATED ALWAYS AS IDENTITY NOT NULL,
+  "pregunta" VARCHAR(150) NOT NULL,
+  "respuestaFalsa1" VARCHAR(100) NOT NULL,
+  "respuestaFalsa2" VARCHAR(100) NOT NULL,
+  "respuestaFalsa3" VARCHAR(100) NOT NULL,
+  "respuestaCorrecta" VARCHAR(100) NOT NULL,
+=======
   idPregunta INT GENERATED ALWAYS AS IDENTITY  NOT NULL,
   pregunta VARCHAR(150) NOT NULL,
   respuestaFalsa1 VARCHAR(100) NOT NULL,
@@ -35,13 +43,53 @@ CREATE TABLE Pregunta (
   respuestaFalsa3 VARCHAR(100) NOT NULL,
   respuestaCorrecta VARCHAR(100) NOT NULL,
   idEmision int NOT NULL,
+>>>>>>> master
 
+<<<<<<< HEAD
   PRIMARY KEY (idPregunta),
   CONSTRAINT fk_Emision_has_Pregunta_Pregunta1
     FOREIGN KEY (idEmision)
     REFERENCES Emision (idEmision)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+=======
+  PRIMARY KEY (idPregunta)
+  FOREIGN KEY (idEmision) REFERENCES Emision(idEmision));
+
+INSERT INTO pregunta VALUES (
+DEFAULT,
+'¿Cuál es el mes de los reyes magos?',
+'Enero',
+'Mayo',
+'Agosto',
+'Enero',
+DEFAULT
+)
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Emision`
+-- -----------------------------------------------------
+CREATE TABLE Emision (
+  idEmision INT GENERATED ALWAYS AS IDENTITY NOT NULL,
+  fecha DATE NOT NULL,
+  fechaFin DATE NOT NULL,
+  horaInicio TIME NOT NULL,
+  horaFin TIME NOT NULL,
+  enEmision INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (idEmision));
+
+INSERT INTO emision VALUES (
+DEFAULT,
+'28/05/2019',
+'29/05/2019',
+'19:30:00',
+'19:50:00',
+0
+)
+
+
+>>>>>>> master
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Participante`

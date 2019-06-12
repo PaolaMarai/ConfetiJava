@@ -5,6 +5,9 @@
  */
 package serverconfetti;
 
+import controladores.EmisionJpaController;
+import controladores.PreguntaJpaController;
+import entidades.Pregunta;
 import interfacesconfetti.ICliente;
 import interfacesconfetti.IServer;
 import java.net.InetAddress;
@@ -58,13 +61,18 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
     }
 
     @Override
-    public void anadirEmision() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void añadirEmision() throws RemoteException {
+        EmisionJpaController ejc = new EmisionJpaController();
     }
 
     @Override
-    public void anadirPreguntas() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void añadirPreguntas(Pregunta pregunta) throws RemoteException {
+        PreguntaJpaController pjc = new PreguntaJpaController();
+        pjc.create(pregunta);
     }
 
+    @Override
+    public void validarRespuesta(String respuesta) throws RemoteException {
+
+    }
 }
