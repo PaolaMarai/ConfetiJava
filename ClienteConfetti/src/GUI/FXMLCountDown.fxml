@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -9,23 +10,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="476.0" prefWidth="724.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLCountDownController">
+<AnchorPane id="AnchorPane" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="476.0" prefWidth="724.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLCountDownController">
    <children>
-      <AnchorPane prefHeight="104.0" prefWidth="762.0" style="-fx-background-color: #4c4343;">
+      <AnchorPane prefHeight="104.0" prefWidth="724.0" style="-fx-background-color: #4c4343;">
          <children>
             <Label layoutX="37.0" layoutY="26.0" text="Confetti" textFill="#4cb8ee">
                <font>
                   <Font name="Arial Italic" size="47.0" />
                </font>
             </Label>
-            <ImageView fx:id="profilePic" fitHeight="76.0" fitWidth="73.0" layoutX="629.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="btnSignOff" layoutX="482.0" layoutY="36.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #6108e6; -fx-background-radius: 10px;" text="Cerrar sesión" underline="true" />
+            <ImageView fx:id="profilePic" fitHeight="76.0" fitWidth="73.0" layoutX="612.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/usuario.png" />
+               </image></ImageView>
+            <Button fx:id="btnSignOff" layoutX="478.0" layoutY="40.0" mnemonicParsing="false" onAction="#cargarPantallaIniciarSesion" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #6108e6; -fx-background-radius: 10px;" text="Cerrar sesión" underline="true" />
          </children>
       </AnchorPane>
       
-      <AnchorPane layoutX="128.0" layoutY="169.0" prefHeight="234.0" prefWidth="529.0" style="-fx-background-color: #341c1c; -fx-border-color: cyan;">
+      <AnchorPane layoutX="98.0" layoutY="169.0" prefHeight="234.0" prefWidth="529.0" style="-fx-background-color: #341c1c; -fx-border-color: cyan;">
          <children>
-            <Label fx:id="remainingHours" alignment="CENTER" layoutX="64.0" layoutY="14.0" prefHeight="153.0" prefWidth="90.0" style="-fx-background-color: #bcb9b9; -fx-background-radius: 15px;" text="00" textAlignment="CENTER">
+            <Label fx:id="remainingHours" alignment="CENTER" contentDisplay="CENTER" layoutX="64.0" layoutY="14.0" prefHeight="153.0" prefWidth="90.0" style="-fx-background-color: #bcb9b9; -fx-background-radius: 15px;" text="00" textAlignment="CENTER">
                <font>
                   <Font size="78.0" />
                </font>

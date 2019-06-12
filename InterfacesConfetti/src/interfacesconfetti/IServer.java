@@ -20,4 +20,5 @@ public interface IServer extends Remote{
     public void añadirEmision()throws RemoteException;
     public void añadirPreguntas(Pregunta pregunta)throws RemoteException;
     public void validarRespuesta(String respuesta) throws RemoteException;
+
 }
