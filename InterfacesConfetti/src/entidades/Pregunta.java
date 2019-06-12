@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -26,58 +28,61 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pregunta.findAll", query = "SELECT p FROM Pregunta p")
-    , @NamedQuery(name = "Pregunta.findByIdPregunta", query = "SELECT p FROM Pregunta p WHERE p.idPregunta = :idPregunta")
+    , @NamedQuery(name = "Pregunta.findByIdpregunta", query = "SELECT p FROM Pregunta p WHERE p.idpregunta = :idpregunta")
     , @NamedQuery(name = "Pregunta.findByPregunta", query = "SELECT p FROM Pregunta p WHERE p.pregunta = :pregunta")
-    , @NamedQuery(name = "Pregunta.findByRespuestaFalsa1", query = "SELECT p FROM Pregunta p WHERE p.respuestaFalsa1 = :respuestaFalsa1")
-    , @NamedQuery(name = "Pregunta.findByRespuestaFalsa2", query = "SELECT p FROM Pregunta p WHERE p.respuestaFalsa2 = :respuestaFalsa2")
-    , @NamedQuery(name = "Pregunta.findByRespuestaFalsa3", query = "SELECT p FROM Pregunta p WHERE p.respuestaFalsa3 = :respuestaFalsa3")
-    , @NamedQuery(name = "Pregunta.findByRespuestaCorrecta", query = "SELECT p FROM Pregunta p WHERE p.respuestaCorrecta = :respuestaCorrecta")})
+    , @NamedQuery(name = "Pregunta.findByRespuestafalsa1", query = "SELECT p FROM Pregunta p WHERE p.respuestafalsa1 = :respuestafalsa1")
+    , @NamedQuery(name = "Pregunta.findByRespuestafalsa2", query = "SELECT p FROM Pregunta p WHERE p.respuestafalsa2 = :respuestafalsa2")
+    , @NamedQuery(name = "Pregunta.findByRespuestafalsa3", query = "SELECT p FROM Pregunta p WHERE p.respuestafalsa3 = :respuestafalsa3")
+    , @NamedQuery(name = "Pregunta.findByRespuestacorrecta", query = "SELECT p FROM Pregunta p WHERE p.respuestacorrecta = :respuestacorrecta")})
 public class Pregunta implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idPregunta")
-    private Integer idPregunta;
+    @Column(name = "IDPREGUNTA")
+    private Integer idpregunta;
     @Basic(optional = false)
-    @Column(name = "pregunta")
+    @Column(name = "PREGUNTA")
     private String pregunta;
     @Basic(optional = false)
-    @Column(name = "respuestaFalsa1")
-    private String respuestaFalsa1;
+    @Column(name = "RESPUESTAFALSA1")
+    private String respuestafalsa1;
     @Basic(optional = false)
-    @Column(name = "respuestaFalsa2")
-    private String respuestaFalsa2;
+    @Column(name = "RESPUESTAFALSA2")
+    private String respuestafalsa2;
     @Basic(optional = false)
-    @Column(name = "respuestaFalsa3")
-    private String respuestaFalsa3;
+    @Column(name = "RESPUESTAFALSA3")
+    private String respuestafalsa3;
     @Basic(optional = false)
-    @Column(name = "respuestaCorrecta")
-    private String respuestaCorrecta;
+    @Column(name = "RESPUESTACORRECTA")
+    private String respuestacorrecta;
+    @JoinColumn(name = "IDEMISION", referencedColumnName = "IDEMISION")
+    @ManyToOne(optional = false)
+    private Emision idemision;
 
     public Pregunta() {
     }
 
-    public Pregunta(Integer idPregunta) {
-        this.idPregunta = idPregunta;
+    public Pregunta(Integer idpregunta) {
+        this.idpregunta = idpregunta;
     }
 
-    public Pregunta(Integer idPregunta, String pregunta, String respuestaFalsa1, String respuestaFalsa2, String respuestaFalsa3, String respuestaCorrecta) {
-        this.idPregunta = idPregunta;
+    public Pregunta(Integer idpregunta, String pregunta, String respuestafalsa1, String respuestafalsa2, String respuestafalsa3, String respuestacorrecta) {
+        this.idpregunta = idpregunta;
         this.pregunta = pregunta;
-        this.respuestaFalsa1 = respuestaFalsa1;
-        this.respuestaFalsa2 = respuestaFalsa2;
-        this.respuestaFalsa3 = respuestaFalsa3;
-        this.respuestaCorrecta = respuestaCorrecta;
+        this.respuestafalsa1 = respuestafalsa1;
+        this.respuestafalsa2 = respuestafalsa2;
+        this.respuestafalsa3 = respuestafalsa3;
+        this.respuestacorrecta = respuestacorrecta;
     }
 
-    public Integer getIdPregunta() {
-        return idPregunta;
+    public Integer getIdpregunta() {
+        return idpregunta;
     }
 
-    public void setIdPregunta(Integer idPregunta) {
-        this.idPregunta = idPregunta;
+    public void setIdpregunta(Integer idpregunta) {
+        this.idpregunta = idpregunta;
     }
 
     public String getPregunta() {
@@ -88,42 +93,50 @@ public class Pregunta implements Serializable {
         this.pregunta = pregunta;
     }
 
-    public String getRespuestaFalsa1() {
-        return respuestaFalsa1;
+    public String getRespuestafalsa1() {
+        return respuestafalsa1;
     }
 
-    public void setRespuestaFalsa1(String respuestaFalsa1) {
-        this.respuestaFalsa1 = respuestaFalsa1;
+    public void setRespuestafalsa1(String respuestafalsa1) {
+        this.respuestafalsa1 = respuestafalsa1;
     }
 
-    public String getRespuestaFalsa2() {
-        return respuestaFalsa2;
+    public String getRespuestafalsa2() {
+        return respuestafalsa2;
     }
 
-    public void setRespuestaFalsa2(String respuestaFalsa2) {
-        this.respuestaFalsa2 = respuestaFalsa2;
+    public void setRespuestafalsa2(String respuestafalsa2) {
+        this.respuestafalsa2 = respuestafalsa2;
     }
 
-    public String getRespuestaFalsa3() {
-        return respuestaFalsa3;
+    public String getRespuestafalsa3() {
+        return respuestafalsa3;
     }
 
-    public void setRespuestaFalsa3(String respuestaFalsa3) {
-        this.respuestaFalsa3 = respuestaFalsa3;
+    public void setRespuestafalsa3(String respuestafalsa3) {
+        this.respuestafalsa3 = respuestafalsa3;
     }
 
-    public String getRespuestaCorrecta() {
-        return respuestaCorrecta;
+    public String getRespuestacorrecta() {
+        return respuestacorrecta;
     }
 
-    public void setRespuestaCorrecta(String respuestaCorrecta) {
-        this.respuestaCorrecta = respuestaCorrecta;
+    public void setRespuestacorrecta(String respuestacorrecta) {
+        this.respuestacorrecta = respuestacorrecta;
+    }
+
+    public Emision getIdemision() {
+        return idemision;
+    }
+
+    public void setIdemision(Emision idemision) {
+        this.idemision = idemision;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idPregunta != null ? idPregunta.hashCode() : 0);
+        hash += (idpregunta != null ? idpregunta.hashCode() : 0);
         return hash;
     }
 
@@ -134,7 +147,7 @@ public class Pregunta implements Serializable {
             return false;
         }
         Pregunta other = (Pregunta) object;
-        if ((this.idPregunta == null && other.idPregunta != null) || (this.idPregunta != null && !this.idPregunta.equals(other.idPregunta))) {
+        if ((this.idpregunta == null && other.idpregunta != null) || (this.idpregunta != null && !this.idpregunta.equals(other.idpregunta))) {
             return false;
         }
         return true;
@@ -142,7 +155,7 @@ public class Pregunta implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Pregunta[ idPregunta=" + idPregunta + " ]";
+        return "entidades.Pregunta[ idpregunta=" + idpregunta + " ]";
     }
     
 }

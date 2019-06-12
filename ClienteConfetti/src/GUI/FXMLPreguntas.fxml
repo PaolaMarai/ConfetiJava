@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLPreguntasController">
    <children>
-      <Button fx:id="btGuardar" layoutX="426.0" layoutY="358.0" mnemonicParsing="false" text="Guardar" textFill="#c622b0" />
+      <Button fx:id="btGuardar" onAction="#guardarPregunta" layoutX="426.0" layoutY="358.0" mnemonicParsing="false" text="Guardar" textFill="#c622b0" />
       <Button fx:id="btCancelar" layoutX="495.0" layoutY="358.0" mnemonicParsing="false" text="Cancelar" textFill="#f80303" />
       <Label layoutX="44.0" layoutY="115.0" text="Pregunta" textFill="WHITE" />
       <Label layoutX="44.0" layoutY="175.0" text="Respuesta" textFill="WHITE" />

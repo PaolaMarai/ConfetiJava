@@ -5,16 +5,21 @@
  */
 package GUI;
 
-import Controladores.PreguntasJpaControlador;
+import RMI.Cliente;
+import controladores.*;
+import entidades.Emision;
 import entidades.Pregunta;
-import entidades.Pregunta_;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+
 
 /**
  * FXML Controller class
@@ -44,6 +49,11 @@ public class FXMLPreguntasController implements Initializable {
     @FXML
     private Button btCancelar;
 
+    private final EmisionJpaController ejc = new EmisionJpaController();
+    private final List<Emision> emisiones = ejc.findEmisionEntities();
+    private Emision emision = new Emision();
+
+
     /**
      * Initializes the controller class.
      */
@@ -67,16 +77,23 @@ public class FXMLPreguntasController implements Initializable {
     
     @FXML
     public void guardarPregunta() {
-        Pregunta pregunta = new Pregunta();
-       
-        pregunta.setPregunta("Prueba");
-        pregunta.setRespuestaCorrecta("uno");
-        pregunta.setRespuestaFalsa1("dos");
-        pregunta.setRespuestaFalsa2("tres"); 
-        pregunta.setRespuestaFalsa3("cuatro");
+        try {
+            emision = emisiones.get(0);
+            Pregunta pregunta = new Pregunta();
+           
+            pregunta.setIdemision(emision);
+            pregunta.setPregunta(txtPregunta.getText());
+            pregunta.setRespuestacorrecta(txtRespuesta1.getText());
+            pregunta.setRespuestafalsa1(txtRespuesta2.getText());
+            pregunta.setRespuestafalsa2(txtRespuesta3.getText());
+            pregunta.setRespuestafalsa3("Ninguno");
+            
+            Cliente.server.añadirPreguntas(pregunta);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(FXMLPreguntasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        PreguntasJpaControlador pjpc = new PreguntasJpaControlador();
-        pjpc.create(pregunta);
     }
 
     @Override
@@ -94,7 +111,11 @@ public class FXMLPreguntasController implements Initializable {
         
         txtEmision.setDisable(true);
         
-        guardarPregunta();
+        List<Emision> emisionL = ejc.findEmisionEntities();
+        Emision emision1 = emisionL.get(0);
+        
+        txtEmision.setText(Integer.toString(emision1.getIdemision()));
+        
     }
 
 }

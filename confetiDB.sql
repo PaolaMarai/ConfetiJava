@@ -18,7 +18,7 @@ CREATE TABLE Usuario (
 -- -----------------------------------------------------
 CREATE TABLE Pregunta (
   
-  "idPregunta" INT GENERATED ALWAYS AS IDENTITY NOT NULL DEFAULT 0,
+  "idPregunta" INT GENERATED ALWAYS AS IDENTITY NOT NULL,
   "pregunta" VARCHAR(150) NOT NULL,
   "respuestaFalsa1" VARCHAR(100) NOT NULL,
   "respuestaFalsa2" VARCHAR(100) NOT NULL,

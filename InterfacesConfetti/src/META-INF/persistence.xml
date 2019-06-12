@@ -3,6 +3,9 @@
   <persistence-unit name="InterfacesConfettiPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entidades.Pregunta</class>
+    <class>entidades.Emision</class>
+    <class>interfacesconfetti.Emision</class>
+    <class>interfacesconfetti.Pregunta</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/Confetti"/>
       <property name="javax.persistence.jdbc.user" value="Confetti"/>
