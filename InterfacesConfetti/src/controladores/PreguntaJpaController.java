@@ -5,7 +5,7 @@
  */
 package controladores;
 
-import controladores.exceptions.NonexistentEntityException;
+import controladores.exception.NonexistentEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
