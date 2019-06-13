@@ -176,7 +176,7 @@ public class FXMLEmisionController implements Initializable {
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    remaininTime.setStyle("-fx-accent:  #6108e6;");
+    remaininTime.setStyle("-fx-accent:  #6108e6");
 
     preguntas = pjc.findPreguntaEntities();
     startGame();
