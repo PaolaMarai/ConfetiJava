@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javax.swing.SwingUtilities;
 
+
 /**
  *
  * @author JET
@@ -62,7 +63,4 @@ public class Cliente extends Application {
             }
         });
     }
-  
-    
-
 }
