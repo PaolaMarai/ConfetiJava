@@ -16,9 +16,6 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 public class ServerConfetti extends UnicastRemoteObject implements IServer {
 
@@ -67,8 +64,8 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
 
     @Override
     public void anadirEmision(Emision nuevaEmision) throws RemoteException {
-        EmisionJpaController ejm = new EmisionJpaController();
-        ejm.create(nuevaEmision);
+        //EmisionJpaController ejm = new EmisionJpaController();
+       // ejm.create(nuevaEmision);
         System.out.println("Agrego");
     }
 
