@@ -1,6 +1,9 @@
 package GUI;
 
+import controladores.EmisionCRUD;
+import controladores.EmisionJpaController;
 import controladores.PreguntaJpaController;
+import entitites.Emision;
 import entitites.Pregunta;
 import java.io.IOException;
 import java.net.URL;
@@ -45,7 +48,7 @@ public class FXMLEmisionController implements Initializable {
   private Label numeroPregunta;
 
   private List<Pregunta> preguntas;
-  private final PreguntaJpaController pjc = new PreguntaJpaController();
+  private final EmisionJpaController ejc = new EmisionJpaController();
 
 
   /**
@@ -169,8 +172,16 @@ public class FXMLEmisionController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     remaininTime.setStyle("-fx-accent: black;");
-
-    preguntas = pjc.findPreguntaEntities();
+    
+    List<Emision> listaEmison = ejc.findEmisionEntities();
+    Emision proxima = null;
+    
+    for(Emision emision : listaEmison) {
+      proxima = emision;
+    }
+    
+    Emision emision = ejc.findEmision(proxima.getIdemision());
+    preguntas = emision.getPreguntaList();
     startGame();
 
   }

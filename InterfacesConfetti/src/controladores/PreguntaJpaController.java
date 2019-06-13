@@ -166,4 +166,27 @@ public class PreguntaJpaController implements Serializable {
         }
     }
     
+    private List<Pregunta> listaPreguntasEmision;
+    
+    public List<Pregunta> findPreguntasForEmision(int idEmision) {
+        
+        EntityManager em;
+        em = emf.createEntityManager();
+
+        String query = "SELECT p FROM Pregunta p WHERE p.idEmision = :idEmision";
+        Query q = em.createQuery(query);
+        q.setParameter("idCliente", idEmision); 
+           
+        try {
+            listaPreguntasEmision = q.getResultList();
+        } catch (Exception e) {
+            System.out.println("Error en: " + e.getMessage());
+        }
+        
+        
+        listaPreguntasEmision = q.getResultList();
+        
+        return listaPreguntasEmision;
+    } 
+    
 }
