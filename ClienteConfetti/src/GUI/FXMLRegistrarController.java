@@ -10,6 +10,7 @@ import entitites.Usuario;
 import interfacesconfetti.UsuarioCRUD;
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.logging.Level;
@@ -77,8 +78,12 @@ public class FXMLRegistrarController implements Initializable {
             } else {
                 
                 String password = txtPassword.getText();
-                String salt = PasswordUtils.getSalt(30);
-                String passwordAsegurada = PasswordUtils.generateSecurePassword(password, salt);
+                String passwordAsegurada = "";
+                try {
+                    passwordAsegurada = PasswordUtils.hashPassword(password);
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(FXMLRegistrarController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 String pin = "123";
                 
                 Usuario usuarioAgregar = new Usuario();

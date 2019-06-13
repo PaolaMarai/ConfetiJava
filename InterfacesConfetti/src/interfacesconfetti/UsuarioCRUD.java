@@ -117,6 +117,25 @@ public class UsuarioCRUD {
         }
         return agregado;
     }
+    
+    public Usuario buscarCredenciales(String usuario, String pass) throws RemoteException {
+        Usuario usuarioLogin = null;
+        openEMF();
+        try {
+            trans.begin();
+            usuarioQuery = em.createNamedQuery("Usuario.findByUsuarioClave", Usuario.class);
+            usuarioQuery.setParameter("usuario", usuario);
+            usuarioQuery.setParameter("clave", pass);
+            usuarioLogin = usuarioQuery.getSingleResult();
+            trans.commit();
+        } catch (NoResultException | RollbackException ex) {
+            usuario = null;
+            System.out.println("No se pudo acceder al recurso solicitado");
+        } finally {
+            closeEMF();
+        }
+        return usuarioLogin;        
+    }
 
     //Termina CRUD Usuario
     //Abrir y cerrar EMF

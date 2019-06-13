@@ -39,7 +39,7 @@ public class Cliente extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/FXMLRegistroUsuario.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/FXMLInicioSesion.fxml"));
 
         Scene scene = new Scene(root);
 
