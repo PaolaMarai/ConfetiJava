@@ -6,6 +6,7 @@
     <class>interfacesconfetti.Pregunta</class>
     <class>entitites.Emision</class>
     <class>entitites.Pregunta</class>
+    <class>entitites.Emision_1</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/Confetti"/>
       <property name="javax.persistence.jdbc.user" value="Confetti"/>
