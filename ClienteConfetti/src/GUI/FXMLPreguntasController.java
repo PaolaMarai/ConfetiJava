@@ -7,8 +7,8 @@ package GUI;
 
 import RMI.Cliente;
 import controladores.*;
-import entidades.Emision;
-import entidades.Pregunta;
+import entitites.Emision;
+import entitites.Pregunta;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;

@@ -20,7 +20,7 @@ public class PreguntaCRUD {
   public static List<Pregunta> obtenerPreguntas() {
 
     Emision emision = EmisionCRUD.obtenerProximaEmision();
-    List<Pregunta> resultados = (List<Pregunta>)emision.getPreguntaCollection();
+    List<Pregunta> resultados = (List<Pregunta>)emision.getPreguntaList();
     
     return resultados;
   }

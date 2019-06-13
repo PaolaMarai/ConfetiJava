@@ -28,30 +28,30 @@
       </AnchorPane>
       <AnchorPane layoutY="105.0" prefHeight="200.0" prefWidth="762.0" style="-fx-background-color: #544242;">
          <children>
-            <Label fx:id="lbPregunta" alignment="CENTER" layoutX="14.0" layoutY="32.0" prefHeight="183.0" prefWidth="734.0" text="Pregunta" textFill="#3abb9b">
+            <Label fx:id="lbPregunta" alignment="CENTER" layoutX="14.0" layoutY="32.0" prefHeight="183.0" prefWidth="734.0" textFill="#3abb9b">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
             <ProgressBar fx:id="remaininTime" layoutY="23.0" prefHeight="18.0" prefWidth="662.0" progress="0.0" />
-            <Label fx:id="numeroPregunta" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="-11.0" prefHeight="87.0" prefWidth="97.0" style="-fx-background-color: #6108e6; -fx-background-radius: 50%;" text="Label" textAlignment="CENTER">
+            <Label fx:id="numeroPregunta" alignment="CENTER" contentDisplay="CENTER" layoutX="662.0" layoutY="-11.0" prefHeight="87.0" prefWidth="97.0" style="-fx-background-color: #6108e6; -fx-background-radius: 50%;" textAlignment="CENTER">
                <font>
                   <Font name="Arial" size="36.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <Button fx:id="firstAnswer" layoutX="14.0" layoutY="358.0" mnemonicParsing="false" onAction="#clickFirst" prefHeight="52.0" prefWidth="227.0" style="-fx-background-color: gray; -fx-background-radius: 15px;" text="Respuesta" textFill="#833090">
+      <Button fx:id="firstAnswer" layoutX="14.0" layoutY="358.0" mnemonicParsing="false" onAction="#clickFirst" prefHeight="52.0" prefWidth="227.0" style="-fx-background-color: gray; -fx-background-radius: 15px;" textFill="#833090">
          <font>
             <Font name="Century" size="27.0" />
          </font>
       </Button>
-      <Button fx:id="secondAnswer" layoutX="268.0" layoutY="358.0" mnemonicParsing="false" onAction="#clickSecond" prefHeight="52.0" prefWidth="227.0" style="-fx-background-color: gray; -fx-background-radius: 15px;" text="Respuesta" textFill="#833090">
+      <Button fx:id="secondAnswer" layoutX="268.0" layoutY="358.0" mnemonicParsing="false" onAction="#clickSecond" prefHeight="52.0" prefWidth="227.0" style="-fx-background-color: gray; -fx-background-radius: 15px;" textFill="#833090">
          <font>
             <Font name="Century" size="27.0" />
          </font>
       </Button>
-      <Button fx:id="thirdAnswer" layoutX="521.0" layoutY="358.0" mnemonicParsing="false" onAction="#clickThird" prefHeight="52.0" prefWidth="227.0" style="-fx-background-color: gray; -fx-background-radius: 15px;" text="Respuesta" textFill="#833090">
+      <Button fx:id="thirdAnswer" layoutX="521.0" layoutY="358.0" mnemonicParsing="false" onAction="#clickThird" prefHeight="52.0" prefWidth="227.0" style="-fx-background-color: gray; -fx-background-radius: 15px;" textFill="#833090">
          <font>
             <Font name="Century" size="27.0" />
          </font>
