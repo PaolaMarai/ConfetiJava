@@ -84,8 +84,11 @@ public class CrearEmisionController implements Initializable {
     private void crearEmision(ActionEvent event) throws RemoteException {
        Emision emision = new Emision();
        String date = this.dateField.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-       String inicio = this.inicioHoraField + ":" + this.inicioMinutosField +":00";
-       String fin = this.finHoraField + ":" + this.finMinutosField + ":00";
+       String inicio = this.inicioHoraField.getValue() + ":" + this.inicioMinutosField.getValue() +":00";
+       String fin = this.finHoraField.getValue() + ":" + this.finMinutosField.getValue() + ":00";
+       
+        System.out.println(inicio);
+       
        emision.setFecha(date);
        emision.setFechafin(date);
        emision.setHorafin(fin);

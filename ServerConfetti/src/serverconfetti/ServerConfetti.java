@@ -64,8 +64,8 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
 
     @Override
     public void anadirEmision(Emision nuevaEmision) throws RemoteException {
-        //EmisionJpaController ejm = new EmisionJpaController();
-       // ejm.create(nuevaEmision);
+        EmisionJpaController ejm = new EmisionJpaController();
+        ejm.create(nuevaEmision);
         System.out.println("Agrego");
     }
 

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1a1334;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CrearEmisionController">
+   <children>
+      <Label prefHeight="69.0" prefWidth="600.0" style="-fx-background-color: #26294a;" text="    Confetti" textFill="#fbbf45">
+         <font>
+            <Font name="Gabriola" size="47.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="59.0" fitWidth="62.0" layoutX="512.0" layoutY="5.0" pickOnBounds="true">
+         <image>
+            <Image url="@img/usuario.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="buttonCerrarSesion" layoutX="428.0" layoutY="14.0" mnemonicParsing="false" onAction="#cerrarSesion" style="-fx-background-color: #110141; -fx-background-radius: 10;" text="Cerrar sesión" textFill="#ef6a32">
+         <font>
+            <Font name="Georgia" size="13.0" />
+         </font>
+      </Button>
+      <Pane layoutX="77.0" layoutY="92.0" prefHeight="246.0" prefWidth="446.0" style="-fx-background-color: #110141; -fx-border-color: #710162; -fx-border-radius: 5;">
+         <children>
+            <DatePicker fx:id="dateField" layoutX="201.0" layoutY="58.0" style="-fx-background-color: #03c383;" />
+            <Label layoutY="-1.0" prefHeight="41.0" prefWidth="446.0" style="-fx-background-color: #26294a; -fx-border-color: #710162; -fx-border-radius: 5;" text="  Programar emisión" textFill="#e43f8f">
+               <font>
+                  <Font name="Candara" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="72.0" layoutY="62.0" text="Fecha de inicio:" textFill="#aad962">
+               <font>
+                  <Font name="Candara" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="72.0" layoutY="150.0" text="Hora de fin:" textFill="#aad962">
+               <font>
+                  <Font name="Candara" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="72.0" layoutY="106.0" text="Hora de inicio:" textFill="#aad962">
+               <font>
+                  <Font name="Candara" size="14.0" />
+               </font>
+            </Label>
+            <Spinner fx:id="finHoraField" layoutX="201.0" layoutY="146.0" prefHeight="25.0" prefWidth="69.0" />
+            <Spinner fx:id="finMinutosField" layoutX="288.0" layoutY="146.0" prefHeight="25.0" prefWidth="69.0" />
+            <Spinner fx:id="inicioHoraField" layoutX="201.0" layoutY="102.0" prefHeight="25.0" prefWidth="69.0" />
+            <Spinner fx:id="inicioMinutosField" layoutX="288.0" layoutY="102.0" prefHeight="25.0" prefWidth="69.0" />
+            <Label layoutX="72.0" layoutY="197.0" text="Monto:" textFill="#aad962">
+               <font>
+                  <Font name="Candara" size="14.0" />
+               </font>
+            </Label>
+            <Spinner fx:id="montoField" layoutX="215.0" layoutY="193.0" prefHeight="25.0" prefWidth="142.0" />
+            <Label layoutX="276.0" layoutY="101.0" text=":" textFill="#03c383">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="276.0" layoutY="145.0" text=":" textFill="#03c383">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="197.0" layoutY="195.0" text="\$" textFill="#03c383">
+               <font>
+                  <Font name="Candara" size="17.0" />
+               </font>
+            </Label>
+            <Circle fill="#ed0345" layoutY="128.0" radius="35.0" stroke="#710162" strokeType="INSIDE" />
+         </children>
+      </Pane>
+      <Button fx:id="crearEminisonButton" layoutX="400.0" layoutY="348.0" mnemonicParsing="false" onAction="#crearEmision" prefHeight="21.0" prefWidth="123.0" style="-fx-background-color: #710162; -fx-background-radius: 10;" text="Crear emisión" textFill="#fbbf45">
+         <font>
+            <Font name="Candara" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
