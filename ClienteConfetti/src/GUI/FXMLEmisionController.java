@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -46,7 +47,6 @@ public class FXMLEmisionController implements Initializable {
 
   private List<Pregunta> preguntas;
   private final PreguntaJpaController pjc = new PreguntaJpaController();
-
 
   /**
    * Valida si la respuesta que dió el jugador es correcta.
@@ -92,7 +92,7 @@ public class FXMLEmisionController implements Initializable {
     String answer = firstAnswer.getText();
     System.out.println(answer);
   }
-  
+
   @FXML
   private void clickSecond() {
     firstAnswer.setDisable(true);
@@ -100,7 +100,7 @@ public class FXMLEmisionController implements Initializable {
     String answer = secondAnswer.getText();
     System.out.println(answer);
   }
-  
+
   @FXML
   private void clickThird() {
     firstAnswer.setDisable(true);
@@ -109,13 +109,23 @@ public class FXMLEmisionController implements Initializable {
     System.out.println(answer);
   }
 
+  private void disableButtons() {
+    firstAnswer.setDisable(true);
+    secondAnswer.setDisable(true);
+    thirdAnswer.setDisable(true);
+  }
+
+  private void enableButtons() {
+    firstAnswer.setDisable(false);
+    secondAnswer.setDisable(false);
+    thirdAnswer.setDisable(false);
+  }
+
   private void startGame() {
     Thread thread = new Thread(() -> {
       int numeroPregunta = 1;
       for (Pregunta p : preguntas) {
-        firstAnswer.setDisable(false);
-        secondAnswer.setDisable(false);
-        thirdAnswer.setDisable(false);
+        enableButtons();
         try {
           setQuestion(p, numeroPregunta);
           setRemainingTime(numeroPregunta);
@@ -153,10 +163,8 @@ public class FXMLEmisionController implements Initializable {
         Logger.getLogger(FXMLEmisionController.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
-    firstAnswer.setDisable(true);
-    secondAnswer.setDisable(true);
-    thirdAnswer.setDisable(true);
-    if (numeroPregunta < 3) {
+    disableButtons();
+    if (numeroPregunta < 10) {
       Platform.runLater(() -> {
         lbPregunta.setText("Cambiando a siguiente pregunta, espera un momento...");
       });
@@ -168,7 +176,7 @@ public class FXMLEmisionController implements Initializable {
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    remaininTime.setStyle("-fx-accent: black;");
+    remaininTime.setStyle("-fx-accent:  #6108e6;");
 
     preguntas = pjc.findPreguntaEntities();
     startGame();
