@@ -5,7 +5,7 @@
  */
 package interfacesconfetti;
 
-import entidades.Pregunta;
+import entitites.Pregunta;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 

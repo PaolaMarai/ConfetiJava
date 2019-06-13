@@ -1,7 +1,7 @@
 package GUI;
 
+import controladores.PreguntaJpaController;
 import entitites.Pregunta;
-import interfacesconfetti.PreguntaCRUD;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -45,6 +45,8 @@ public class FXMLEmisionController implements Initializable {
   private Label numeroPregunta;
 
   private List<Pregunta> preguntas;
+  private final PreguntaJpaController pjc = new PreguntaJpaController();
+
 
   /**
    * Valida si la respuesta que dió el jugador es correcta.
@@ -168,7 +170,7 @@ public class FXMLEmisionController implements Initializable {
   public void initialize(URL url, ResourceBundle rb) {
     remaininTime.setStyle("-fx-accent: black;");
 
-    preguntas = PreguntaCRUD.obtenerPreguntas();
+    preguntas = pjc.findPreguntaEntities();
     startGame();
 
   }

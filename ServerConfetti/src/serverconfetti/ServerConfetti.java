@@ -7,7 +7,7 @@ package serverconfetti;
 
 import controladores.EmisionJpaController;
 import controladores.PreguntaJpaController;
-import entidades.Pregunta;
+import entitites.Pregunta;
 import interfacesconfetti.ICliente;
 import interfacesconfetti.IServer;
 import java.net.InetAddress;
