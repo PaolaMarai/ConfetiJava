@@ -5,6 +5,8 @@
  */
 package serverconfetti;
 
+import controladores.EmisionJpaController;
+import entidades.Emision;
 import interfacesconfetti.ICliente;
 import interfacesconfetti.IServer;
 import java.net.InetAddress;
@@ -14,6 +16,9 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class ServerConfetti extends UnicastRemoteObject implements IServer {
 
@@ -33,33 +38,38 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
         }
     }
 
-    public ServerConfetti() throws RemoteException{
+    public ServerConfetti() throws RemoteException {
         super();
         clientes = new ArrayList<>();
     }
-    
+
     public static void main(String[] args) throws RemoteException {
         (new ServerConfetti()).init();
     }
 
     @Override
     public int registrarCallbackCliente(ICliente cliente) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!clientes.contains(cliente)) {
+            clientes.add(cliente);
+        }
+        return clientes.indexOf(cliente);
     }
 
     @Override
     public void deregistrarCallbackCliente(ICliente cliente) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        clientes.remove(cliente);
     }
 
     @Override
     public void notificarPuntaje(int puntaje, int idCliente) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
-    public void anadirEmision() throws RemoteException {
-        
+    public void anadirEmision(Emision nuevaEmision) throws RemoteException {
+        EmisionJpaController ejm = new EmisionJpaController();
+        ejm.create(nuevaEmision);
+        System.out.println("Agrego");
     }
 
     @Override

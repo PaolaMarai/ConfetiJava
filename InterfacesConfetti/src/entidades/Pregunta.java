@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entitites;
+package entidades;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -155,7 +155,7 @@ public class Pregunta implements Serializable {
 
     @Override
     public String toString() {
-        return "entitites.Pregunta[ idpregunta=" + idpregunta + " ]";
+        return "entidades.Pregunta[ idpregunta=" + idpregunta + " ]";
     }
     
 }

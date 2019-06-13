@@ -3,13 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entitites;
+package entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,12 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -35,6 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Emision.findAll", query = "SELECT e FROM Emision e")
     , @NamedQuery(name = "Emision.findByIdemision", query = "SELECT e FROM Emision e WHERE e.idemision = :idemision")
     , @NamedQuery(name = "Emision.findByFecha", query = "SELECT e FROM Emision e WHERE e.fecha = :fecha")
+    , @NamedQuery(name = "Emision.findByFechafin", query = "SELECT e FROM Emision e WHERE e.fechafin = :fechafin")
     , @NamedQuery(name = "Emision.findByHorainicio", query = "SELECT e FROM Emision e WHERE e.horainicio = :horainicio")
     , @NamedQuery(name = "Emision.findByHorafin", query = "SELECT e FROM Emision e WHERE e.horafin = :horafin")
     , @NamedQuery(name = "Emision.findByEnemision", query = "SELECT e FROM Emision e WHERE e.enemision = :enemision")})
@@ -48,23 +42,19 @@ public class Emision implements Serializable {
     private Integer idemision;
     @Basic(optional = false)
     @Column(name = "FECHA")
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
+    private String fecha;
+    @Basic(optional = false)
+    @Column(name = "FECHAFIN")
+    private String fechafin;
     @Basic(optional = false)
     @Column(name = "HORAINICIO")
-    @Temporal(TemporalType.TIME)
-    private Date horainicio;
+    private String horainicio;
     @Basic(optional = false)
     @Column(name = "HORAFIN")
-    @Temporal(TemporalType.TIME)
-    private Date horafin;
+    private String horafin;
     @Basic(optional = false)
     @Column(name = "ENEMISION")
     private int enemision;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idemision")
-    private Collection<Pregunta> preguntaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idemision")
-    private Collection<Participante> participanteCollection;
 
     public Emision() {
     }
@@ -73,9 +63,10 @@ public class Emision implements Serializable {
         this.idemision = idemision;
     }
 
-    public Emision(Integer idemision, Date fecha, Date horainicio, Date horafin, int enemision) {
+    public Emision(Integer idemision, String fecha, String fechafin, String horainicio, String horafin, int enemision) {
         this.idemision = idemision;
         this.fecha = fecha;
+        this.fechafin = fechafin;
         this.horainicio = horainicio;
         this.horafin = horafin;
         this.enemision = enemision;
@@ -89,27 +80,35 @@ public class Emision implements Serializable {
         this.idemision = idemision;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
-    public Date getHorainicio() {
+    public String getFechafin() {
+        return fechafin;
+    }
+
+    public void setFechafin(String fechafin) {
+        this.fechafin = fechafin;
+    }
+
+    public String getHorainicio() {
         return horainicio;
     }
 
-    public void setHorainicio(Date horainicio) {
+    public void setHorainicio(String horainicio) {
         this.horainicio = horainicio;
     }
 
-    public Date getHorafin() {
+    public String getHorafin() {
         return horafin;
     }
 
-    public void setHorafin(Date horafin) {
+    public void setHorafin(String horafin) {
         this.horafin = horafin;
     }
 
@@ -119,24 +118,6 @@ public class Emision implements Serializable {
 
     public void setEnemision(int enemision) {
         this.enemision = enemision;
-    }
-
-    @XmlTransient
-    public Collection<Pregunta> getPreguntaCollection() {
-        return preguntaCollection;
-    }
-
-    public void setPreguntaCollection(Collection<Pregunta> preguntaCollection) {
-        this.preguntaCollection = preguntaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Participante> getParticipanteCollection() {
-        return participanteCollection;
-    }
-
-    public void setParticipanteCollection(Collection<Participante> participanteCollection) {
-        this.participanteCollection = participanteCollection;
     }
 
     @Override
@@ -161,7 +142,7 @@ public class Emision implements Serializable {
 
     @Override
     public String toString() {
-        return "entitites.Emision[ idemision=" + idemision + " ]";
+        return "entidades.Emision[ idemision=" + idemision + " ]";
     }
     
 }

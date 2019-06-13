@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entitites;
+package entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -75,8 +75,8 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "ISADMIN")
     private int isadmin;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
-    private Collection<Participante> participanteCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private List<Participante> participanteList;
 
     public Usuario() {
     }
@@ -179,12 +179,12 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Participante> getParticipanteCollection() {
-        return participanteCollection;
+    public List<Participante> getParticipanteList() {
+        return participanteList;
     }
 
-    public void setParticipanteCollection(Collection<Participante> participanteCollection) {
-        this.participanteCollection = participanteCollection;
+    public void setParticipanteList(List<Participante> participanteList) {
+        this.participanteList = participanteList;
     }
 
     @Override
@@ -209,7 +209,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "entitites.Usuario[ idusuario=" + idusuario + " ]";
+        return "entidades.Usuario[ idusuario=" + idusuario + " ]";
     }
     
 }

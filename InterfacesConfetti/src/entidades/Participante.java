@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entitites;
+package entidades;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -28,49 +26,51 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Participante.findAll", query = "SELECT p FROM Participante p")
-    , @NamedQuery(name = "Participante.findByIdparticipante", query = "SELECT p FROM Participante p WHERE p.idparticipante = :idparticipante")
+    , @NamedQuery(name = "Participante.findByUsuarioIdusuario", query = "SELECT p FROM Participante p WHERE p.participantePK.usuarioIdusuario = :usuarioIdusuario")
+    , @NamedQuery(name = "Participante.findByEmisionIdemision", query = "SELECT p FROM Participante p WHERE p.participantePK.emisionIdemision = :emisionIdemision")
     , @NamedQuery(name = "Participante.findByIswinner", query = "SELECT p FROM Participante p WHERE p.iswinner = :iswinner")
     , @NamedQuery(name = "Participante.findByPuntaje", query = "SELECT p FROM Participante p WHERE p.puntaje = :puntaje")})
 public class Participante implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "IDPARTICIPANTE")
-    private Integer idparticipante;
+    @EmbeddedId
+    protected ParticipantePK participantePK;
     @Basic(optional = false)
     @Column(name = "ISWINNER")
     private int iswinner;
     @Basic(optional = false)
     @Column(name = "PUNTAJE")
     private int puntaje;
-    @JoinColumn(name = "IDEMISION", referencedColumnName = "IDEMISION")
+    @JoinColumn(name = "EMISION_IDEMISION", referencedColumnName = "IDEMISION", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Emision idemision;
-    @JoinColumn(name = "IDUSUARIO", referencedColumnName = "IDUSUARIO")
+    private Emision emision;
+    @JoinColumn(name = "USUARIO_IDUSUARIO", referencedColumnName = "IDUSUARIO", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Usuario idusuario;
+    private Usuario usuario;
 
     public Participante() {
     }
 
-    public Participante(Integer idparticipante) {
-        this.idparticipante = idparticipante;
+    public Participante(ParticipantePK participantePK) {
+        this.participantePK = participantePK;
     }
 
-    public Participante(Integer idparticipante, int iswinner, int puntaje) {
-        this.idparticipante = idparticipante;
+    public Participante(ParticipantePK participantePK, int iswinner, int puntaje) {
+        this.participantePK = participantePK;
         this.iswinner = iswinner;
         this.puntaje = puntaje;
     }
 
-    public Integer getIdparticipante() {
-        return idparticipante;
+    public Participante(int usuarioIdusuario, int emisionIdemision) {
+        this.participantePK = new ParticipantePK(usuarioIdusuario, emisionIdemision);
     }
 
-    public void setIdparticipante(Integer idparticipante) {
-        this.idparticipante = idparticipante;
+    public ParticipantePK getParticipantePK() {
+        return participantePK;
+    }
+
+    public void setParticipantePK(ParticipantePK participantePK) {
+        this.participantePK = participantePK;
     }
 
     public int getIswinner() {
@@ -89,26 +89,26 @@ public class Participante implements Serializable {
         this.puntaje = puntaje;
     }
 
-    public Emision getIdemision() {
-        return idemision;
+    public Emision getEmision() {
+        return emision;
     }
 
-    public void setIdemision(Emision idemision) {
-        this.idemision = idemision;
+    public void setEmision(Emision emision) {
+        this.emision = emision;
     }
 
-    public Usuario getIdusuario() {
-        return idusuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdusuario(Usuario idusuario) {
-        this.idusuario = idusuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idparticipante != null ? idparticipante.hashCode() : 0);
+        hash += (participantePK != null ? participantePK.hashCode() : 0);
         return hash;
     }
 
@@ -119,7 +119,7 @@ public class Participante implements Serializable {
             return false;
         }
         Participante other = (Participante) object;
-        if ((this.idparticipante == null && other.idparticipante != null) || (this.idparticipante != null && !this.idparticipante.equals(other.idparticipante))) {
+        if ((this.participantePK == null && other.participantePK != null) || (this.participantePK != null && !this.participantePK.equals(other.participantePK))) {
             return false;
         }
         return true;
@@ -127,7 +127,7 @@ public class Participante implements Serializable {
 
     @Override
     public String toString() {
-        return "entitites.Participante[ idparticipante=" + idparticipante + " ]";
+        return "entidades.Participante[ participantePK=" + participantePK + " ]";
     }
     
 }
