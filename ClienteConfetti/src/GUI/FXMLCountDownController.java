@@ -1,7 +1,7 @@
 package GUI;
 
 import entitites.Emision;
-import interfacesconfetti.EmisionCRUD;
+import controladores.EmisionCRUD;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
