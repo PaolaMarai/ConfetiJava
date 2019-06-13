@@ -5,8 +5,8 @@
  */
 package controladores;
 
-import controladores.exceptions.IllegalOrphanException;
-import controladores.exceptions.NonexistentEntityException;
+import controladores.exception.IllegalOrphanException;
+import controladores.exception.NonexistentEntityException;
 import entidades.Emision;
 import java.io.Serializable;
 import javax.persistence.Query;
