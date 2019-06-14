@@ -5,8 +5,8 @@
  */
 package controladores;
 
-import controladores.exception.IllegalOrphanException;
-import controladores.exception.NonexistentEntityException;
+import controladores.exceptions.IllegalOrphanException;
+import controladores.exceptions.NonexistentEntityException;
 import entitites.Emision;
 import java.io.Serializable;
 import javax.persistence.Query;
@@ -22,7 +22,7 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author JET
+ * @author Paola
  */
 public class EmisionJpaController implements Serializable {
 
@@ -200,5 +200,5 @@ public class EmisionJpaController implements Serializable {
             em.close();
         }
     }
-
+    
 }

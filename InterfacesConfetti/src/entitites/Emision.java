@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author JET
+ * @author Paola
  */
 @Entity
 @Table(name = "EMISION")
@@ -157,7 +157,7 @@ public class Emision implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Emision[ idemision=" + idemision + " ]";
+        return "entitites.Emision[ idemision=" + idemision + " ]";
     }
     
 }

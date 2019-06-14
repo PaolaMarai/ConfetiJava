@@ -1,11 +1,11 @@
 package GUI;
 
+
 import entitites.Emision;
 import controladores.EmisionCRUD;
+
 import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -114,26 +114,12 @@ public class FXMLCountDownController implements Initializable {
    * @return El estado de la transmisión.
    */
   public boolean enEmision() {
-    Emision emision = EmisionCRUD.obtenerProximaEmision();
-    
-    if (emision.getEnemision() == 1) {
-      return true;
-    }
+   
     return false;
   }
 
   private Date formatearFecha() {
-    Emision proxima = EmisionCRUD.obtenerProximaEmision();
-    
-    String fechaHora = proxima.getFecha() + " " + proxima.getHorainicio();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-    Date fecha;
-    try {
-      fecha = sdf.parse(fechaHora);
-      return fecha;
-    } catch (ParseException ex) {
-      Logger.getLogger(FXMLCountDownController.class.getName()).log(Level.SEVERE, null, ex);
-    }
+  
     return null;
   }
 
