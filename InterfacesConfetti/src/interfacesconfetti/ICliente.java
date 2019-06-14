@@ -5,6 +5,7 @@
  */
 package interfacesconfetti;
 
+import entitites.Pregunta;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -14,5 +15,7 @@ import java.rmi.RemoteException;
  * @author marai
  */
 public interface ICliente extends Remote{
-    public void iniciaProcesamiento() throws RemoteException;
+    public void iniciarJuego() throws RemoteException;
+    public void setPregunta(Pregunta pregunta, int numeroPregunta) throws RemoteException;
+    public void setRemainingTime(double remainingTime) throws RemoteException;
 }

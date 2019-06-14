@@ -7,7 +7,8 @@ package serverconfetti;
 
 import controladores.EmisionJpaController;
 import controladores.PreguntaJpaController;
-import entidades.Pregunta;
+import entitites.Pregunta;
+import entitites.Emision;
 import interfacesconfetti.ICliente;
 import interfacesconfetti.IServer;
 import java.net.InetAddress;
@@ -17,10 +18,14 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 
 public class ServerConfetti extends UnicastRemoteObject implements IServer {
 
     private final List<ICliente> clientes;
+    private List<Pregunta> preguntas;
 
     private void init() throws RemoteException {
         try {
@@ -36,33 +41,39 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
         }
     }
 
-    public ServerConfetti() throws RemoteException{
+    public ServerConfetti() throws RemoteException {
         super();
         clientes = new ArrayList<>();
     }
-    
+
     public static void main(String[] args) throws RemoteException {
         (new ServerConfetti()).init();
     }
 
     @Override
     public int registrarCallbackCliente(ICliente cliente) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!clientes.contains(cliente)) {
+            clientes.add(cliente);
+        }
+        System.out.println("Conectados: " + clientes.size());
+        return clientes.indexOf(cliente);
     }
 
     @Override
     public void deregistrarCallbackCliente(ICliente cliente) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        clientes.remove(cliente);
     }
 
     @Override
     public void notificarPuntaje(int puntaje, int idCliente) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
-    public void añadirEmision() throws RemoteException {
-        EmisionJpaController ejc = new EmisionJpaController();
+    public void anadirEmision(Emision nuevaEmision) throws RemoteException {
+        EmisionJpaController ejm = new EmisionJpaController();
+        ejm.create(nuevaEmision);
+        System.out.println("Agrego");
     }
 
     @Override
@@ -75,4 +86,49 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
     public void validarRespuesta(String respuesta) throws RemoteException {
 
     }
+
+    @Override
+    public List<Pregunta> recuperarPreguntas() throws RemoteException {
+        EmisionJpaController ejc = new EmisionJpaController();
+        List<Emision> listaEmison = ejc.findEmisionEntities();
+        Emision proxima = null;
+
+        for (Emision emision : listaEmison) {
+            proxima = emision;
+        }
+
+        Emision emision = ejc.findEmision(proxima.getIdemision());
+        preguntas = emision.getPreguntaList();
+
+        return preguntas;
+    }
+
+    @Override
+    public void mandarPreguntas() throws RemoteException {
+        preguntas = recuperarPreguntas();
+        Thread thread = new Thread(() -> {
+            int numeroPregunta = 1;
+            for (Pregunta p : preguntas) {
+                try {
+                    for (ICliente e : clientes) {
+                        e.setPregunta(p, numeroPregunta);
+                    }
+
+                    for (ICliente e : clientes) {
+                        e.setRemainingTime(numeroPregunta);
+                    }
+
+                    Thread.sleep(5000);
+                } catch (InterruptedException ex) {
+                    System.out.println("Error en:" + ex.getMessage());
+                } catch (RemoteException ex) {
+                    Logger.getLogger(ServerConfetti.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                numeroPregunta++;
+            }
+        });
+        thread.start();
+    }
+
+    
 }

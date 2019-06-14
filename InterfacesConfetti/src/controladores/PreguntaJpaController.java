@@ -11,8 +11,8 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import entidades.Emision;
-import entidades.Pregunta;
+import entitites.Emision;
+import entitites.Pregunta;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -168,21 +168,28 @@ public class PreguntaJpaController implements Serializable {
         }
     }
     
-    public List<Pregunta> findPreguntasForEmision(String id) {
+
+    private List<Pregunta> listaPreguntasEmision;
+    
+    public List<Pregunta> findPreguntasForEmision(int idEmision) {
         
         EntityManager em;
-        em = getEntityManager();
-        
-        Query q = em.createQuery("SELECT p FROM Pregunta p WHERE p.IDEMISION = :id");
-        q.setParameter("IDEMISION", id); 
+        em = emf.createEntityManager();
+
+        String query = "SELECT p FROM Pregunta p WHERE p.idEmision = :idEmision";
+        Query q = em.createQuery(query);
+        q.setParameter("idCliente", idEmision); 
+           
         try {
-            listaPreguntas = q.getResultList();
+            listaPreguntasEmision = q.getResultList();
+
         } catch (Exception e) {
             System.out.println("Error en: " + e.getMessage());
         }
         
-        return listaPreguntas;
         
+        listaPreguntasEmision = q.getResultList();
+        
+        return listaPreguntasEmision;
     }
-    
 }

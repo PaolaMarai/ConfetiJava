@@ -1,16 +1,17 @@
 package RMI;
 
 import interfacesconfetti.IServer;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javax.swing.SwingUtilities;
+
 
 /**
  *
@@ -20,7 +21,7 @@ public class Cliente extends Application {
 
     private static final int PORT = 3333;
     private static final String NAMESERVICE = "ConfettiServer";
-    private static final String HOSTNAMESERVER = "localhost";
+    private static final String HOSTNAMESERVER = "10.50.1.19";
 
     public static IServer server;
     public static CallBackCliente callBackCliente;
@@ -32,14 +33,16 @@ public class Cliente extends Application {
             server = (IServer) registro.lookup(NAMESERVICE);
             //server.registraCallBackCliente(callBackCliente);
 
-        } catch (Exception ex) {
+        } catch (NotBoundException | RemoteException ex) {
             System.err.println("Error en: " + ex.getMessage());
         }
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/FXMLPreguntas.fxml"));
+
+
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/FXMLEmision.fxml"));
 
         Scene scene = new Scene(root);
 
@@ -62,7 +65,4 @@ public class Cliente extends Application {
             }
         });
     }
-  
-    
-
 }

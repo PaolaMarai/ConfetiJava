@@ -1,4 +1,4 @@
-package interfacesconfetti;
+package controladores;
 
 import entitites.Emision;
 import java.util.List;
@@ -16,10 +16,10 @@ public class EmisionCRUD {
   private static EntityManagerFactory emFactory;
   private static EntityManager em;
 
-  public static void registrarEmision(String emision) {
+  public static void registrarEmision() {
     em.getTransaction().begin();
 
-    Emision fecha = new Emision();
+    Emision proxima = new Emision();
 
     em.getTransaction().commit();
     em.close();

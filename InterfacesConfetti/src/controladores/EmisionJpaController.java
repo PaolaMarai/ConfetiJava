@@ -7,13 +7,14 @@ package controladores;
 
 import controladores.exception.IllegalOrphanException;
 import controladores.exception.NonexistentEntityException;
-import entidades.Emision;
+
+import entitites.Emision;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import entidades.Pregunta;
+import entitites.Pregunta;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -22,7 +23,7 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author JET
+ * @author Paola
  */
 public class EmisionJpaController implements Serializable {
 
@@ -200,5 +201,5 @@ public class EmisionJpaController implements Serializable {
             em.close();
         }
     }
-
+    
 }
