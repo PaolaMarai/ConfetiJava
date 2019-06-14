@@ -5,7 +5,6 @@
  */
 package interfacesconfetti;
 
-
 import entitites.Pregunta;
 
 import entitites.Emision;
@@ -17,7 +16,6 @@ import java.rmi.RemoteException;
  *
  * @author marai
  */
-
 
 public interface IServer extends Remote {
 

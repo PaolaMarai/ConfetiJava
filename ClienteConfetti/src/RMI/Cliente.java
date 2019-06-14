@@ -1,6 +1,7 @@
 package RMI;
 
 import interfacesconfetti.IServer;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -24,6 +25,7 @@ public class Cliente extends Application {
 
     public static IServer server;
     public static CallBackCliente callBackCliente;
+    public static Sesion sesion = Sesion.getInstance();
 
     private void javaRMI() throws RemoteException {
         try {
@@ -32,14 +34,13 @@ public class Cliente extends Application {
             server = (IServer) registro.lookup(NAMESERVICE);
             //server.registraCallBackCliente(callBackCliente);
 
-        } catch (Exception ex) {
+        } catch (NotBoundException | RemoteException ex) {
             System.err.println("Error en: " + ex.getMessage());
         }
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
 
         Parent root = FXMLLoader.load(getClass().getResource("../GUI/FXMLEmision.fxml"));
 

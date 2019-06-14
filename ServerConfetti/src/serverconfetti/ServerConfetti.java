@@ -22,6 +22,7 @@ import java.util.List;
 public class ServerConfetti extends UnicastRemoteObject implements IServer {
 
     private final List<ICliente> clientes;
+    
 
     private void init() throws RemoteException {
         try {
@@ -80,8 +81,5 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
     public void validarRespuesta(String respuesta) throws RemoteException {
 
     }
-
-
-    
 
 }
