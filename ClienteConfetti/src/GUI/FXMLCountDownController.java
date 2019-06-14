@@ -1,6 +1,5 @@
 package GUI;
 
-
 import entitites.Emision;
 import controladores.EmisionCRUD;
 
@@ -91,7 +90,7 @@ public class FXMLCountDownController implements Initializable {
         int minutes = (int) Math.floor(now / 60 % 60);
         int hours = (int) Math.floor(now / 3600 % 24);
         Platform.runLater(() -> {
-          if (hours == 0 && minutes == 0 && seconds == -1) {
+          if (hours <= 0 && minutes <= 0 && seconds <= -1) {
             timer.cancel();
             cargarPantallaEmision();
             closeButtonAction();
@@ -114,12 +113,12 @@ public class FXMLCountDownController implements Initializable {
    * @return El estado de la transmisión.
    */
   public boolean enEmision() {
-   
+
     return false;
   }
 
   private Date formatearFecha() {
-  
+
     return null;
   }
 
