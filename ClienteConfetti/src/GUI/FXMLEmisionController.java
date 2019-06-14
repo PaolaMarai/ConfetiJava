@@ -1,8 +1,6 @@
 package GUI;
 
-import controladores.EmisionCRUD;
 import controladores.EmisionJpaController;
-import controladores.PreguntaJpaController;
 import entitites.Emision;
 import entitites.Pregunta;
 import java.io.IOException;
@@ -17,7 +15,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -128,15 +125,16 @@ public class FXMLEmisionController implements Initializable {
     Thread thread = new Thread(() -> {
       int numeroPregunta = 1;
       for (Pregunta p : preguntas) {
-        enableButtons();
         try {
+          enableButtons();
           setQuestion(p, numeroPregunta);
           setRemainingTime(numeroPregunta);
+          
           Thread.sleep(5000);
+          numeroPregunta++;
         } catch (InterruptedException ex) {
           Logger.getLogger(FXMLEmisionController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        numeroPregunta++;
       }
       Platform.runLater(() -> {
         lbPregunta.setText("El juego ha terminado.");
@@ -145,9 +143,9 @@ public class FXMLEmisionController implements Initializable {
     thread.start();
   }
 
-  private void setQuestion(Pregunta p, int numeroPregunta) {
+  private void setQuestion(Pregunta p, int numero) {
     Platform.runLater(() -> {
-      this.numeroPregunta.setText(String.valueOf(numeroPregunta));
+      numeroPregunta.setText(String.valueOf(numero));
       lbPregunta.setText(p.getPregunta());
       firstAnswer.setText(p.getRespuestafalsa1());
       secondAnswer.setText(p.getRespuestafalsa2());
@@ -167,7 +165,7 @@ public class FXMLEmisionController implements Initializable {
       }
     }
     disableButtons();
-    if (numeroPregunta < 10) {
+    if (numeroPregunta < preguntas.size()) {
       Platform.runLater(() -> {
         lbPregunta.setText("Cambiando a siguiente pregunta, espera un momento...");
       });
@@ -188,7 +186,7 @@ public class FXMLEmisionController implements Initializable {
     for(Emision emision : listaEmison) {
       proxima = emision;
     }
-    
+
     Emision emision = ejc.findEmision(proxima.getIdemision());
     preguntas = emision.getPreguntaList();
     startGame();

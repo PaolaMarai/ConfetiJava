@@ -91,8 +91,11 @@ public class FXMLCountDownController implements Initializable {
         int minutes = (int) Math.floor(now / 60 % 60);
         int hours = (int) Math.floor(now / 3600 % 24);
         Platform.runLater(() -> {
-          if (hours == 0 && minutes == 0 && seconds == -1) {
+          if (hours <= 0 && minutes <= 0 && seconds <= -1) {
             timer.cancel();
+            remainingHours.setText("0");
+            remainingMinutes.setText("0");
+            remainingSeconds.setText("0");
             cargarPantallaEmision();
             closeButtonAction();
           } else {
