@@ -189,7 +189,11 @@ public class FXMLEmisionController implements Initializable {
 
     Emision emision = ejc.findEmision(proxima.getIdemision());
     preguntas = emision.getPreguntaList();
-    startGame();
+    if(preguntas.size() > 0) {
+      startGame();
+    } else {
+      lbPregunta.setText("No hay preguntas para esta emisión");
+    }
 
   }
 }
