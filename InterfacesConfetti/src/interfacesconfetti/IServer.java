@@ -15,7 +15,6 @@ import java.rmi.RemoteException;
  * @author marai
  */
 
-
 public interface IServer extends Remote {
 
     public int registrarCallbackCliente(ICliente cliente) throws RemoteException;
