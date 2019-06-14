@@ -1,6 +1,7 @@
 package RMI;
 
 import interfacesconfetti.IServer;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -32,7 +33,7 @@ public class Cliente extends Application {
             server = (IServer) registro.lookup(NAMESERVICE);
             //server.registraCallBackCliente(callBackCliente);
 
-        } catch (Exception ex) {
+        } catch (NotBoundException | RemoteException ex) {
             System.err.println("Error en: " + ex.getMessage());
         }
     }
