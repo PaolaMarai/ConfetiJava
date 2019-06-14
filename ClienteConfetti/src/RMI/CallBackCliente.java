@@ -19,6 +19,7 @@ public class CallBackCliente extends UnicastRemoteObject implements ICliente {
 
   List<Pregunta> preguntas;
 
+
   public CallBackCliente() throws RemoteException {
     super();
   }

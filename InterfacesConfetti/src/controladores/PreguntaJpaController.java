@@ -5,7 +5,7 @@
  */
 package controladores;
 
-import controladores.exceptions.NonexistentEntityException;
+import controladores.exception.NonexistentEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -165,5 +165,28 @@ public class PreguntaJpaController implements Serializable {
             em.close();
         }
     }
+    
+    private List<Pregunta> listaPreguntasEmision;
+    
+    public List<Pregunta> findPreguntasForEmision(int idEmision) {
+        
+        EntityManager em;
+        em = emf.createEntityManager();
+
+        String query = "SELECT p FROM Pregunta p WHERE p.idEmision = :idEmision";
+        Query q = em.createQuery(query);
+        q.setParameter("idCliente", idEmision); 
+           
+        try {
+            listaPreguntasEmision = q.getResultList();
+        } catch (Exception e) {
+            System.out.println("Error en: " + e.getMessage());
+        }
+        
+        
+        listaPreguntasEmision = q.getResultList();
+        
+        return listaPreguntasEmision;
+    } 
     
 }

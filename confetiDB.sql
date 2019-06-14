@@ -46,12 +46,16 @@ CREATE TABLE Pregunta (
 >>>>>>> master
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> HISTORIA28
   PRIMARY KEY (idPregunta),
   CONSTRAINT fk_Emision_has_Pregunta_Pregunta1
     FOREIGN KEY (idEmision)
     REFERENCES Emision (idEmision)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+<<<<<<< HEAD
 =======
   PRIMARY KEY (idPregunta)
   FOREIGN KEY (idEmision) REFERENCES Emision(idEmision));
@@ -90,6 +94,8 @@ DEFAULT,
 
 
 >>>>>>> master
+=======
+>>>>>>> HISTORIA28
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Participante`

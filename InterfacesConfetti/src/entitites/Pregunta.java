@@ -5,7 +5,6 @@
  */
 package entitites;
 
-import entitites.Emision;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -22,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author JET
+ * @author Paola
  */
 @Entity
 @Table(name = "PREGUNTA")
@@ -156,7 +155,7 @@ public class Pregunta implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Pregunta[ idpregunta=" + idpregunta + " ]";
+        return "entitites.Pregunta[ idpregunta=" + idpregunta + " ]";
     }
     
 }

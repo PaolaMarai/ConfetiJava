@@ -22,7 +22,7 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author JET
+ * @author Paola
  */
 public class EmisionJpaController implements Serializable {
 
@@ -200,5 +200,5 @@ public class EmisionJpaController implements Serializable {
             em.close();
         }
     }
-
+    
 }
