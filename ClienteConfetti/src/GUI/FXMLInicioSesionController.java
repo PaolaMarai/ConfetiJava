@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import RMI.Cliente;
 import Utilities.PasswordUtils;
 import entitites.Usuario;
 import interfacesconfetti.UsuarioCRUD;
@@ -84,6 +85,8 @@ public class FXMLInicioSesionController implements Initializable {
                 Logger.getLogger(FXMLInicioSesionController.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (passwordMatch.compareTo(usuarioLogin.getClave()) == 0) {
+                Cliente.sesion.setUsuario(usuarioLogin.getUsuario());
+                Cliente.sesion.setPass(usuarioLogin.getClave());
                 autenticado = true;
             }
         }

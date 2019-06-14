@@ -24,6 +24,7 @@ public class Cliente extends Application {
 
     private static IServer server;
     private static CallBackCliente callBackCliente;
+    public static Sesion sesion = Sesion.getInstance();
 
     private void javaRMI() throws RemoteException {
         try {
