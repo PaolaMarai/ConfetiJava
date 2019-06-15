@@ -31,5 +31,4 @@ public interface IServer extends Remote {
     public void anadirEmision(Emision nuevaEmision) throws RemoteException;
     
     public List<Pregunta> recuperarPreguntas() throws RemoteException;
-
 }

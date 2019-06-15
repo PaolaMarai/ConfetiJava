@@ -136,6 +136,7 @@ public class FXMLEmisionController implements Initializable {
           numeroPregunta++;
         } catch (InterruptedException ex) {
           Logger.getLogger(FXMLEmisionController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error en: recuperar preguntas");
         }
       }
       Platform.runLater(() -> {
@@ -146,6 +147,7 @@ public class FXMLEmisionController implements Initializable {
   }
 
   private void setQuestion(Pregunta p, int numero) {
+
     Platform.runLater(() -> {
       numeroPregunta.setText(String.valueOf(numero));
       lbPregunta.setText(p.getPregunta());
@@ -155,7 +157,7 @@ public class FXMLEmisionController implements Initializable {
     });
   }
 
-  private void setRemainingTime(int numeroPregunta) {
+  public void setRemainingTime(int numeroPregunta) {
     double progress = 0;
     for (int i = 0; i <= 1000; i++) {
       try {
@@ -191,6 +193,5 @@ public class FXMLEmisionController implements Initializable {
     } else {
       lbPregunta.setText("No hay preguntas para esta emisión");
     }
-
   }
 }

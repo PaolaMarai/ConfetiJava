@@ -18,11 +18,15 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 
 public class ServerConfetti extends UnicastRemoteObject implements IServer {
 
     private final List<ICliente> clientes;
-    
+
+    private List<Pregunta> preguntas;
 
     private void init() throws RemoteException {
         try {
@@ -51,19 +55,26 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
     public int registrarCallbackCliente(ICliente cliente) throws RemoteException {
         if (!clientes.contains(cliente)) {
             clientes.add(cliente);
+            System.out.println("Cliente conectado:" + clientes.size());
+            
         }
         return clientes.indexOf(cliente);
     }
 
     @Override
     public void deregistrarCallbackCliente(ICliente cliente) throws RemoteException {
-        clientes.remove(cliente);
+        if(clientes.contains(cliente)) {
+            clientes.remove(cliente);
+            System.out.println("Cliente desconectado: " + clientes.size());
+        }
+        
     }
 
     @Override
     public void notificarPuntaje(int puntaje, int idCliente) throws RemoteException {
-        
+
     }
+
     @Override
     public void anadirEmision(Emision nuevaEmision) throws RemoteException {
         EmisionJpaController ejm = new EmisionJpaController();
@@ -84,7 +95,19 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
 
     @Override
     public List<Pregunta> recuperarPreguntas() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   
+        EmisionJpaController ejc = new EmisionJpaController();
+        List<Emision> listaEmison = ejc.findEmisionEntities();
+        Emision proxima = null;
+
+        for (Emision emision : listaEmison) {
+            proxima = emision;
+        }
+
+        Emision emision = ejc.findEmision(proxima.getIdemision());
+        preguntas = emision.getPreguntaList();
+        System.out.println(preguntas.size());
+        return preguntas;
     }
-    
+
 }

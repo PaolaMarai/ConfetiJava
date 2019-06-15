@@ -24,6 +24,8 @@ import javax.persistence.Persistence;
  */
 public class PreguntaJpaController implements Serializable {
 
+    private List<Pregunta> listaPreguntas;
+    
     public PreguntaJpaController() {
         this.emf = Persistence.createEntityManagerFactory("InterfacesConfettiPU");
     }
@@ -166,6 +168,7 @@ public class PreguntaJpaController implements Serializable {
         }
     }
     
+
     private List<Pregunta> listaPreguntasEmision;
     
     public List<Pregunta> findPreguntasForEmision(int idEmision) {
@@ -179,6 +182,7 @@ public class PreguntaJpaController implements Serializable {
            
         try {
             listaPreguntasEmision = q.getResultList();
+
         } catch (Exception e) {
             System.out.println("Error en: " + e.getMessage());
         }
@@ -187,6 +191,5 @@ public class PreguntaJpaController implements Serializable {
         listaPreguntasEmision = q.getResultList();
         
         return listaPreguntasEmision;
-    } 
-    
+    }
 }

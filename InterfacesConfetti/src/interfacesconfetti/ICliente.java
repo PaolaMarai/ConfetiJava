@@ -16,6 +16,6 @@ import java.rmi.RemoteException;
  */
 public interface ICliente extends Remote{
     public void iniciarJuego() throws RemoteException;
-    public void setPregunta(Pregunta pregunta) throws RemoteException;
+    public void setPregunta(Pregunta pregunta, int numeroPregunta) throws RemoteException;
     public void setRemainingTime(double remainingTime) throws RemoteException;
 }
