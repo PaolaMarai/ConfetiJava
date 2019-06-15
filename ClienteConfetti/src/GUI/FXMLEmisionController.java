@@ -1,12 +1,11 @@
 package GUI;
 
-import controladores.EmisionCRUD;
+import RMI.Cliente;
 import controladores.EmisionJpaController;
-import controladores.PreguntaJpaController;
-import entitites.Emision;
 import entitites.Pregunta;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -17,7 +16,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -130,13 +128,15 @@ public class FXMLEmisionController implements Initializable {
       for (Pregunta p : preguntas) {
         enableButtons();
         try {
+          enableButtons();
           setQuestion(p, numeroPregunta);
           setRemainingTime(numeroPregunta);
+
           Thread.sleep(5000);
+          numeroPregunta++;
         } catch (InterruptedException ex) {
           Logger.getLogger(FXMLEmisionController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        numeroPregunta++;
       }
       Platform.runLater(() -> {
         lbPregunta.setText("El juego ha terminado.");
@@ -145,9 +145,9 @@ public class FXMLEmisionController implements Initializable {
     thread.start();
   }
 
-  private void setQuestion(Pregunta p, int numeroPregunta) {
+  private void setQuestion(Pregunta p, int numero) {
     Platform.runLater(() -> {
-      this.numeroPregunta.setText(String.valueOf(numeroPregunta));
+      numeroPregunta.setText(String.valueOf(numero));
       lbPregunta.setText(p.getPregunta());
       firstAnswer.setText(p.getRespuestafalsa1());
       secondAnswer.setText(p.getRespuestafalsa2());
@@ -167,7 +167,8 @@ public class FXMLEmisionController implements Initializable {
       }
     }
     disableButtons();
-    if (numeroPregunta < 10) {
+
+    if (numeroPregunta < preguntas.size()) {
       Platform.runLater(() -> {
         lbPregunta.setText("Cambiando a siguiente pregunta, espera un momento...");
       });
@@ -180,18 +181,16 @@ public class FXMLEmisionController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle rb) {
 
-    remaininTime.setStyle("-fx-accent: black;");
-    
-    List<Emision> listaEmison = ejc.findEmisionEntities();
-    Emision proxima = null;
-    
-    for(Emision emision : listaEmison) {
-      proxima = emision;
+    try {
+      preguntas = Cliente.server.recuperarPreguntas();
+    } catch (RemoteException ex) {
+      Logger.getLogger(FXMLEmisionController.class.getName()).log(Level.SEVERE, null, ex);
     }
-    
-    Emision emision = ejc.findEmision(proxima.getIdemision());
-    preguntas = emision.getPreguntaList();
-    startGame();
+    if (preguntas.size() > 0) {
+      startGame();
+    } else {
+      lbPregunta.setText("No hay preguntas para esta emisión");
+    }
 
   }
 }

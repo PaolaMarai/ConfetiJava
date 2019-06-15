@@ -1,12 +1,16 @@
 package GUI;
 
-
 import entitites.Emision;
 import controladores.EmisionCRUD;
+import controladores.EmisionJpaController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -40,6 +44,8 @@ public class FXMLCountDownController implements Initializable {
   private Label remainingMinutes;
   @FXML
   private Label remainingSeconds;
+  
+  private final EmisionJpaController ejc = new EmisionJpaController();
 
   @FXML
   public void cargarPantallaEmision() {
@@ -91,7 +97,7 @@ public class FXMLCountDownController implements Initializable {
         int minutes = (int) Math.floor(now / 60 % 60);
         int hours = (int) Math.floor(now / 3600 % 24);
         Platform.runLater(() -> {
-          if (hours == 0 && minutes == 0 && seconds == -1) {
+          if (hours <= 0 && minutes <= 0 && seconds <= -1) {
             timer.cancel();
             cargarPantallaEmision();
             closeButtonAction();
@@ -114,13 +120,26 @@ public class FXMLCountDownController implements Initializable {
    * @return El estado de la transmisión.
    */
   public boolean enEmision() {
-   
+
     return false;
   }
 
   private Date formatearFecha() {
-  
-    return null;
+    List<Emision> listaEmison = ejc.findEmisionEntities();
+    Emision emision = null;
+    for(Emision e : listaEmison) {
+      emision = e;
+    }
+    String fechaEmision = emision.getFecha() + " " + emision.getHorainicio();
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+    Date fechaE = null;
+    try {
+      fechaE = sdf.parse(fechaEmision);
+    } catch (ParseException ex) {
+      Logger.getLogger(FXMLCountDownController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+    return fechaE;
   }
 
   /**

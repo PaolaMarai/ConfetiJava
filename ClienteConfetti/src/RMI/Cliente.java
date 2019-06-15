@@ -21,17 +21,18 @@ public class Cliente extends Application {
 
     private static final int PORT = 3333;
     private static final String NAMESERVICE = "ConfettiServer";
-    private static final String HOSTNAMESERVER = "localhost";
+    private static final String HOSTNAMESERVER = "192.168.43.99";
 
     public static IServer server;
     public static CallBackCliente callBackCliente;
+    public static Sesion sesion = Sesion.getInstance();
 
     private void javaRMI() throws RemoteException {
         try {
             callBackCliente = new CallBackCliente();
             Registry registro = LocateRegistry.getRegistry(HOSTNAMESERVER, PORT);
             server = (IServer) registro.lookup(NAMESERVICE);
-            //server.registraCallBackCliente(callBackCliente);
+            server.registrarCallbackCliente(callBackCliente);
 
         } catch (NotBoundException | RemoteException ex) {
             System.err.println("Error en: " + ex.getMessage());
@@ -40,7 +41,6 @@ public class Cliente extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
 
         Parent root = FXMLLoader.load(getClass().getResource("../GUI/FXMLEmision.fxml"));
 

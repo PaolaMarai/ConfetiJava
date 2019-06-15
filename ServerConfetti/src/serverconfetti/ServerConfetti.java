@@ -22,6 +22,7 @@ import java.util.List;
 public class ServerConfetti extends UnicastRemoteObject implements IServer {
 
     private final List<ICliente> clientes;
+    
 
     private void init() throws RemoteException {
         try {
@@ -81,7 +82,9 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
 
     }
 
-
+    @Override
+    public List<Pregunta> recuperarPreguntas() throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
-
 }

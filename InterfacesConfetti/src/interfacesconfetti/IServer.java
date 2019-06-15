@@ -5,19 +5,16 @@
  */
 package interfacesconfetti;
 
-
 import entitites.Pregunta;
-
 import entitites.Emision;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 /**
  *
  * @author marai
  */
-
 
 public interface IServer extends Remote {
 
@@ -32,5 +29,7 @@ public interface IServer extends Remote {
     public void validarRespuesta(String respuesta) throws RemoteException;
 
     public void anadirEmision(Emision nuevaEmision) throws RemoteException;
+    
+    public List<Pregunta> recuperarPreguntas() throws RemoteException;
 
 }
