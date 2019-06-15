@@ -1,10 +1,11 @@
 package GUI;
 
+import RMI.Cliente;
 import controladores.EmisionJpaController;
-import entitites.Emision;
 import entitites.Pregunta;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -130,7 +131,7 @@ public class FXMLEmisionController implements Initializable {
           enableButtons();
           setQuestion(p, numeroPregunta);
           setRemainingTime(numeroPregunta);
-          
+
           Thread.sleep(5000);
           numeroPregunta++;
         } catch (InterruptedException ex) {
@@ -180,16 +181,12 @@ public class FXMLEmisionController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle rb) {
 
-    remaininTime.setStyle("-fx-accent:  #6108e6");
-    List<Emision> listaEmison = ejc.findEmisionEntities();
-    Emision proxima = null;
-    
-    for(Emision emision : listaEmison) {
-      proxima = emision;
+    try {
+      preguntas = Cliente.server.recuperarPreguntas();
+    } catch (RemoteException ex) {
+      Logger.getLogger(FXMLEmisionController.class.getName()).log(Level.SEVERE, null, ex);
     }
-    
-    preguntas = proxima.getPreguntaList();
-    if(preguntas.size() > 0) {
+    if (preguntas.size() > 0) {
       startGame();
     } else {
       lbPregunta.setText("No hay preguntas para esta emisión");
