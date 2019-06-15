@@ -54,14 +54,19 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
     public int registrarCallbackCliente(ICliente cliente) throws RemoteException {
         if (!clientes.contains(cliente)) {
             clientes.add(cliente);
+            System.out.println("Cliente conectado:" + clientes.size());
+            
         }
-        System.out.println("Conectados: " + clientes.size());
         return clientes.indexOf(cliente);
     }
 
     @Override
     public void deregistrarCallbackCliente(ICliente cliente) throws RemoteException {
-        clientes.remove(cliente);
+        if(clientes.contains(cliente)) {
+            clientes.remove(cliente);
+            System.out.println("Cliente desconectado: " + clientes.size());
+        }
+        
     }
 
     @Override
@@ -99,36 +104,8 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
 
         Emision emision = ejc.findEmision(proxima.getIdemision());
         preguntas = emision.getPreguntaList();
-
+        System.out.println(preguntas.size());
         return preguntas;
     }
 
-    @Override
-    public void mandarPreguntas() throws RemoteException {
-        preguntas = recuperarPreguntas();
-        Thread thread = new Thread(() -> {
-            int numeroPregunta = 1;
-            for (Pregunta p : preguntas) {
-                try {
-                    for (ICliente e : clientes) {
-                        e.setPregunta(p, numeroPregunta);
-                    }
-
-                    for (ICliente e : clientes) {
-                        e.setRemainingTime(numeroPregunta);
-                    }
-
-                    Thread.sleep(5000);
-                } catch (InterruptedException ex) {
-                    System.out.println("Error en:" + ex.getMessage());
-                } catch (RemoteException ex) {
-                    Logger.getLogger(ServerConfetti.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                numeroPregunta++;
-            }
-        });
-        thread.start();
-    }
-
-    
 }

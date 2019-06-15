@@ -137,6 +137,7 @@ public class FXMLEmisionController implements Initializable {
           Thread.sleep(5000);
         } catch (InterruptedException ex) {
           Logger.getLogger(FXMLEmisionController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error en: recuperar preguntas");
         }
         numeroPregunta++;
       }
@@ -191,9 +192,10 @@ public class FXMLEmisionController implements Initializable {
       proxima = emision;
     }
     
-    Emision emision = ejc.findEmision(proxima.getIdemision());
+    Emision e = ejc.findEmision(proxima.getIdemision());
       try {
           preguntas = Cliente.server.recuperarPreguntas();
+          System.out.println(preguntas.size());
       } catch (RemoteException ex) {
           Logger.getLogger(FXMLEmisionController.class.getName()).log(Level.SEVERE, null, ex);
       }
