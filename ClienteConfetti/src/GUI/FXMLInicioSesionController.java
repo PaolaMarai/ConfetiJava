@@ -3,7 +3,7 @@ package GUI;
 import RMI.Cliente;
 import Utilities.PasswordUtils;
 import entitites.Usuario;
-import controladores.UsuarioCRUD;
+import interfacesconfetti.UsuarioCRUD;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.security.NoSuchAlgorithmException;
@@ -65,11 +65,11 @@ public class FXMLInicioSesionController implements Initializable {
         boolean autenticado = false;
         UsuarioCRUD us = new UsuarioCRUD();
         Usuario usuarioLogin = null;
-        try {
-            usuarioLogin = us.buscarUsuarioPorUsuario(txtUser.getText());
-        } catch (RemoteException ex) {
-            Logger.getLogger(FXMLInicioSesionController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      try {
+        usuarioLogin = us.buscarUsuarioPorUsuario(txtUser.getText());
+      } catch (RemoteException ex) {
+        Logger.getLogger(FXMLInicioSesionController.class.getName()).log(Level.SEVERE, null, ex);
+      }
         if (usuarioLogin != null) {
             boolean match = false;
             String pass = txtPassword.getText();

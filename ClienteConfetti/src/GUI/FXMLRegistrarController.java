@@ -7,7 +7,7 @@ package GUI;
 
 import Utilities.PasswordUtils;
 import entitites.Usuario;
-import controladores.UsuarioCRUD;
+import interfacesconfetti.UsuarioCRUD;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.security.NoSuchAlgorithmException;
