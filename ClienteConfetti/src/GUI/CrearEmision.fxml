@@ -72,10 +72,5 @@
             <Font name="Candara" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="buttonPregunta" layoutX="77.0" layoutY="349.0" mnemonicParsing="false" style="-fx-background-color: #11aabb; -fx-background-radius: 10;" text="Añadir Pregunta" textFill="#fff12b">
-         <font>
-            <Font name="Candara" size="14.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

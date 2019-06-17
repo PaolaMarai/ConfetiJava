@@ -47,7 +47,9 @@ public class CrearEmisionController implements Initializable {
     private Button crearEminisonButton;
 
     /**
-     * Initializes the controller class.
+     * Se inicia la pantalla de crear emision.
+     * @param url
+     * @param rb 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

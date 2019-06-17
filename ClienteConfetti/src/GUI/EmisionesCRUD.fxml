@@ -26,7 +26,7 @@
             <Font name="Georgia" size="13.0" />
          </font>
       </Button>
-      <TableView fx:id="tablaEmisiones" layoutX="37.0" layoutY="93.0" prefHeight="233.0" prefWidth="526.0" style="-fx-background-color: #f4d4f1;">
+      <TableView fx:id="tablaEmisiones" layoutX="32.0" layoutY="90.0" prefHeight="233.0" prefWidth="536.0" style="-fx-background-color: #f4d4f1;">
         <columns>
             <TableColumn fx:id="idEmision" prefWidth="75.0" style="-fx-background-color: #fff12b;" text="ID" />
           <TableColumn fx:id="columnFecha" prefWidth="210.0" style="-fx-background-color: #fbbf45;" text="Fecha" />
@@ -34,17 +34,22 @@
             <TableColumn fx:id="columnFin" prefWidth="115.0" style="-fx-background-color: #03c383;" text="Hora de Fin" />
         </columns>
       </TableView>
-      <Button fx:id="buttonNuevo" layoutX="454.0" layoutY="347.0" mnemonicParsing="false" onAction="#nuevaEmision" style="-fx-background-color: #11aabb; -fx-background-radius: 10;" text="Nueva Emision" textFill="#fffc5a">
+      <Button fx:id="buttonNuevo" layoutX="459.0" layoutY="347.0" mnemonicParsing="false" onAction="#nuevaEmision" style="-fx-background-color: #11aabb; -fx-background-radius: 10;" text="Nueva Emision" textFill="#fffc5a">
          <font>
             <Font name="Candara Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="buttonBorrar" layoutX="37.0" layoutY="347.0" mnemonicParsing="false" onAction="#remover" style="-fx-background-radius: 10; -fx-background-color: #f80c12;" text="Cancelar Emision" textFill="#fffc5a">
+      <Button fx:id="buttonBorrar" layoutX="27.0" layoutY="347.0" mnemonicParsing="false" onAction="#remover" style="-fx-background-radius: 10; -fx-background-color: #f80c12;" text="Cancelar Emision" textFill="#fffc5a">
          <font>
             <Font name="Candara Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="buttonEditar" layoutX="225.0" layoutY="347.0" mnemonicParsing="false" onAction="#editar" style="-fx-background-radius: 10; -fx-background-color: #710162;" text="Reprogramar Emision" textFill="#fffc5a">
+      <Button fx:id="buttonEditar" layoutX="160.0" layoutY="347.0" mnemonicParsing="false" onAction="#editar" style="-fx-background-radius: 10; -fx-background-color: #710162;" text="Reprogramar Emision" textFill="#fffc5a">
+         <font>
+            <Font name="Candara Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonPregunta" layoutX="323.0" layoutY="347.0" mnemonicParsing="false" style="-fx-background-color: #3311bb; -fx-background-radius: 10;" text="Añadir Preguntas" textFill="#fff12b">
          <font>
             <Font name="Candara Bold" size="14.0" />
          </font>

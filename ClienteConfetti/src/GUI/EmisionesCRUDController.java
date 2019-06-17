@@ -52,9 +52,13 @@ public class EmisionesCRUDController implements Initializable {
     private Button buttonEditar;
     @FXML
     private TableColumn<Emision, Integer> idEmision;
+    @FXML
+    private Button buttonPregunta;
 
     /**
-     * Initializes the controller class.
+     * Se inicia la pantalla de gestionar emisiones.
+     * @param url
+     * @param rb 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -90,15 +94,22 @@ public class EmisionesCRUDController implements Initializable {
     private void remover(ActionEvent event) throws RemoteException {
         Emision e = this.tablaEmisiones.getSelectionModel().getSelectedItem();
         if(e != null){
+            
             Cliente.server.eliminarEmision(e.getIdemision());
         } else {
-            JOptionPane.showMessageDialog(null, "Por favor, seleccione el personal que desea editar");
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione la Emision que desea editar");
         }
+        
     }
 
     @FXML
-    private void editar(ActionEvent event) {
-        
+    private void editar(ActionEvent event) throws RemoteException {
+        Emision e = this.tablaEmisiones.getSelectionModel().getSelectedItem();
+        if(e != null){   
+            Cliente.server.editarEmision(e);
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione la Emision que desea editar");
+        }
     }
 
     private void abrirVentana(String ventana) throws IOException {

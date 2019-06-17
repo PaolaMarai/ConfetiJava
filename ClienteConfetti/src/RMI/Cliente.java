@@ -38,7 +38,11 @@ public class Cliente extends Application {
             System.err.println("Error en: " + ex.getMessage());
         }
     }
-
+/**
+ * 
+ * @param primaryStage
+ * @throws Exception 
+ */
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -50,11 +54,17 @@ public class Cliente extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
     }
-
+    /**
+     * 
+     * @throws RemoteException 
+     */
     public Cliente() throws RemoteException {
         javaRMI();
     }
-
+/**
+ * 
+ * @param args 
+ */
     public static void main(String[] args) {
         launch(args);
         SwingUtilities.invokeLater(() -> {
