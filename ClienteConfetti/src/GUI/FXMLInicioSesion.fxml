@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLInicioSesionController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLInicioSesionController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="601.0">
          <image>
@@ -23,11 +23,11 @@
             <PasswordField fx:id="txtPassword" layoutX="50.0" layoutY="200.0" prefHeight="25.0" prefWidth="208.0" promptText="Contraseña" style="-fx-border-radius: 15;" />
             <Label layoutX="65.0" layoutY="81.0" text="Confetti Proyect" textFill="#9b1ee4">
                <font>
-                  <Font name="Century Gothic Italic" size="25.0" />
+                  <Font name="Gabriola" size="37.0" />
                </font>
             </Label>
             <Label layoutX="50.0" layoutY="239.0" text="¿No tienes cuenta?" textFill="WHITE" />
-            <Button fx:id="btnRegistrar" onAction="#cargarPantallaRegistro" layoutX="63.0" layoutY="260.0" mnemonicParsing="false" style="-fx-background-color: BB33FF; -fx-border-radius: 15;" text="Registrarse" textFill="WHITE" />
+            <Button fx:id="btnRegistrar" layoutX="63.0" layoutY="260.0" mnemonicParsing="false" onAction="#cargarPantallaRegistro" style="-fx-background-color: BB33FF; -fx-border-radius: 15;" text="Registrarse" textFill="WHITE" />
             <Label fx:id="lblError" alignment="TOP_LEFT" layoutX="51.0" layoutY="289.0" prefHeight="69.0" prefWidth="208.0" textFill="WHITE" />
          </children>
       </AnchorPane>

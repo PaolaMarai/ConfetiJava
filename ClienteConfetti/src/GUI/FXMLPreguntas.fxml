@@ -6,28 +6,49 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLPreguntasController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLPreguntasController">
    <children>
-      <Button fx:id="btGuardar" onAction="#guardarPregunta" layoutX="426.0" layoutY="358.0" mnemonicParsing="false" text="Guardar" textFill="#c622b0" />
-      <Button fx:id="btCancelar" onAction="#cargarPantallaEmision" layoutX="495.0" layoutY="358.0" mnemonicParsing="false" text="Cancelar" textFill="#f80303" />
-      <Label layoutX="44.0" layoutY="115.0" text="Pregunta" textFill="WHITE" />
-      <Label layoutX="44.0" layoutY="175.0" text="Respuesta" textFill="WHITE" />
-      <Label layoutX="44.0" layoutY="303.0" text="Respuesta" textFill="WHITE" />
-      <Label layoutX="44.0" layoutY="238.0" text="Respuesta" textFill="WHITE" />
+      <Button fx:id="btGuardar" layoutX="426.0" layoutY="358.0" mnemonicParsing="false" onAction="#guardarPregunta" style="-fx-background-color: #11aabb; -fx-background-radius: 10;" text="Guardar" textFill="#380346">
+         <font>
+            <Font name="Candara" size="13.0" />
+         </font></Button>
+      <Button fx:id="btCancelar" layoutX="495.0" layoutY="358.0" mnemonicParsing="false" style="-fx-background-color: #22ccaa; -fx-background-radius: 10;" text="Cancelar" textFill="#f80303">
+         <font>
+            <Font name="Candara" size="13.0" />
+         </font></Button>
+      <Label layoutX="44.0" layoutY="115.0" text="Pregunta" textFill="#ed8e0e">
+         <font>
+            <Font name="Candara Bold" size="13.0" />
+         </font></Label>
+      <Label layoutX="43.0" layoutY="165.0" prefHeight="38.0" prefWidth="119.0" text="Respuesta correcta" textFill="#31f51b">
+         <font>
+            <Font name="Candara Bold" size="13.0" />
+         </font></Label>
+      <Label layoutX="44.0" layoutY="303.0" text="Respuesta" textFill="#ee0e0e">
+         <font>
+            <Font name="Candara Bold" size="13.0" />
+         </font></Label>
+      <Label layoutX="44.0" layoutY="238.0" text="Respuesta" textFill="#ee0e0e">
+         <font>
+            <Font name="Candara Bold" size="13.0" />
+         </font></Label>
       <TextField fx:id="txtPregunta" layoutX="116.0" layoutY="111.0" prefHeight="25.0" prefWidth="441.0" />
-      <TextField fx:id="txtRespuesta1" layoutX="116.0" layoutY="171.0" prefHeight="25.0" prefWidth="441.0" />
+      <TextField fx:id="txtRespuesta1" layoutX="160.0" layoutY="171.0" prefHeight="25.0" prefWidth="397.0" />
       <TextField fx:id="txtRespuesta2" layoutX="116.0" layoutY="234.0" prefHeight="25.0" prefWidth="441.0" />
       <TextField fx:id="txtRespuesta3" layoutX="116.0" layoutY="299.0" prefHeight="25.0" prefWidth="441.0" />
       <TextField fx:id="txtEmision" layoutX="116.0" layoutY="60.0" prefHeight="25.0" prefWidth="76.0" />
-      <AnchorPane prefHeight="43.0" prefWidth="600.0" style="-fx-background-color: #2F4F4F;">
+      <AnchorPane prefHeight="43.0" prefWidth="600.0" style="-fx-background-color: #1a1334;">
          <children>
-            <Label layoutX="14.0" layoutY="7.0" text="Confetti" textFill="#9459e8">
+            <Label layoutX="14.0" layoutY="7.0" text="Confetti" textFill="#f80c12">
                <font>
-                  <Font size="25.0" />
+                  <Font name="Gabriola" size="31.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <Label layoutX="44.0" layoutY="64.0" text="Emision" textFill="WHITE" />
+      <Label layoutX="44.0" layoutY="64.0" text="Emision" textFill="#f00c9b">
+         <font>
+            <Font name="Candara Bold" size="13.0" />
+         </font></Label>
    </children>
 </AnchorPane>
