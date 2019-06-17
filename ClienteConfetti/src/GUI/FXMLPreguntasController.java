@@ -9,17 +9,23 @@ import RMI.Cliente;
 import controladores.*;
 import entitites.Emision;
 import entitites.Pregunta;
+import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -76,22 +82,29 @@ public class FXMLPreguntasController implements Initializable {
 
     @FXML
     public void guardarPregunta() {
-        if (validarCampos() == true) {
+        if (validarCampos() != true) {
             try {
-                for (Emision e : emisiones) {
-                    emision = e;
-                }
-
                 Pregunta pregunta = new Pregunta();
 
-                pregunta.setIdemision(emision);
-                pregunta.setPregunta(txtPregunta.getText());
+                pregunta.setIdemision(Cliente.server.setEmiision());
+                pregunta.setPregunta("¿" + txtPregunta.getText() + "?");
                 pregunta.setRespuestacorrecta(txtRespuesta1.getText());
                 pregunta.setRespuestafalsa1(txtRespuesta2.getText());
                 pregunta.setRespuestafalsa2(txtRespuesta3.getText());
                 pregunta.setRespuestafalsa3("Ninguno");
 
                 Cliente.server.añadirPreguntas(pregunta);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Informacion");
+                alert.setHeaderText("Guardado");
+                alert.setContentText("Pregunta guardada");
+                alert.showAndWait();
+                
+                txtPregunta.setText("");
+                txtRespuesta1.setText("");
+                txtRespuesta2.setText("");
+                txtRespuesta3.setText("");
 
             } catch (Exception ex) {
                 Logger.getLogger(FXMLPreguntasController.class.getName()).log(Level.SEVERE, null, ex);
@@ -117,6 +130,29 @@ public class FXMLPreguntasController implements Initializable {
         return vacio;
     }
 
+    @FXML
+    public void cargarPantallaEmision() {
+        Stage stage = new Stage();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUI/EmisionesCRUD.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+            closeButtonAction();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLInicioSesionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void closeButtonAction() {
+        Stage stage = (Stage) btCancelar.getScene().getWindow();
+        stage.close();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -135,7 +171,11 @@ public class FXMLPreguntasController implements Initializable {
         List<Emision> emisionL = ejc.findEmisionEntities();
         Emision emision1 = emisionL.get(0);
 
-        txtEmision.setText(Integer.toString(emision1.getIdemision()));
+        try {
+            txtEmision.setText(Integer.toString(Cliente.server.setEmiision().getIdemision()));
+        } catch (RemoteException ex) {
+            Logger.getLogger(FXMLPreguntasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
