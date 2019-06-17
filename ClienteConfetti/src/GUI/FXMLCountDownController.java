@@ -131,7 +131,7 @@ public class FXMLCountDownController implements Initializable {
       emision = e;
     }
     String fechaEmision = emision.getFecha() + " " + emision.getHorainicio();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
     Date fechaE = null;
     try {
       fechaE = sdf.parse(fechaEmision);

@@ -9,8 +9,10 @@ import controladores.EmisionJpaController;
 import controladores.PreguntaJpaController;
 import entitites.Pregunta;
 import entitites.Emision;
+import entitites.Usuario;
 import interfacesconfetti.ICliente;
 import interfacesconfetti.IServer;
+import interfacesconfetti.UsuarioCRUD;
 import java.net.InetAddress;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -110,4 +112,32 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
         return preguntas;
     }
 
+    public List<Emision> buscarTodasEmision() throws RemoteException {
+        EmisionJpaController ejm = new EmisionJpaController();
+        return ejm.findEmisionEntities();
+    }
+
+    @Override
+    public boolean agregarUsuarioSe(Usuario usuario) throws RemoteException {
+        UsuarioCRUD ucd = new UsuarioCRUD();
+        return ucd.agregarUsuario(usuario);
+    }
+
+    @Override
+    public Usuario buscarUsuarioPorUsuarioSe(String user) throws RemoteException {
+        UsuarioCRUD ucd = new UsuarioCRUD();
+        return ucd.buscarUsuarioPorUsuario(user);
+    }
+
+    @Override
+    public Usuario buscarUsuarioPorCorreoSe(String correo) throws RemoteException {
+        UsuarioCRUD ucd = new UsuarioCRUD();
+        return ucd.buscarUsuarioPorCorreo(correo);
+    }
+
+    @Override
+    public Usuario buscarUsuaroPorTelefonoSe(String telefono) throws RemoteException {
+        UsuarioCRUD ucd = new UsuarioCRUD();
+        return ucd.buscarUsuarioPorTelefono(telefono);
+    }
 }
