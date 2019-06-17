@@ -10,19 +10,22 @@ package RMI;
  * @author Beto Lafarc
  */
 public class Sesion {
+
     private static Sesion sesion;
     private static String usuario;
     private static String pass;
     private static String idUsuario;
+    private static boolean admin;
     private static boolean autenticado;
-    
-    private Sesion(){}
-    
+
+    private Sesion() {
+    }
+
     public static Sesion getInstance() {
-        if(null == sesion) {
+        if (null == sesion) {
             sesion = new Sesion();
         }
-        
+
         return sesion;
     }
 
@@ -57,7 +60,22 @@ public class Sesion {
     public static void setAutenticado(boolean autenticado) {
         Sesion.autenticado = autenticado;
     }
-    
-    
+
+    public static String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public static void setIdUsuario(String idUsuario) {
+        Sesion.idUsuario = idUsuario;
+    }
+
+    public static boolean isAdmin() {
+        return admin;
+    }
+
+    public static void setAdmin(boolean admin) {
+        Sesion.admin = admin;
+    }
+
     
 }
