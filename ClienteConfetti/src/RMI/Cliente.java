@@ -32,7 +32,7 @@ public class Cliente extends Application {
             callBackCliente = new CallBackCliente();
             Registry registro = LocateRegistry.getRegistry(HOSTNAMESERVER, PORT);
             server = (IServer) registro.lookup(NAMESERVICE);
-            //server.registraCallBackCliente(callBackCliente);
+            server.registrarCallbackCliente(callBackCliente);
 
         } catch (NotBoundException | RemoteException ex) {
             System.err.println("Error en: " + ex.getMessage());

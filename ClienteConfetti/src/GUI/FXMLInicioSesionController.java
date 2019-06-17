@@ -65,11 +65,11 @@ public class FXMLInicioSesionController implements Initializable {
         boolean autenticado = false;
         UsuarioCRUD us = new UsuarioCRUD();
         Usuario usuarioLogin = null;
-        try {
-            usuarioLogin = us.buscarUsuarioPorUsuario(txtUser.getText());
-        } catch (RemoteException ex) {
-            Logger.getLogger(FXMLInicioSesionController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      try {
+        usuarioLogin = us.buscarUsuarioPorUsuario(txtUser.getText());
+      } catch (RemoteException ex) {
+        Logger.getLogger(FXMLInicioSesionController.class.getName()).log(Level.SEVERE, null, ex);
+      }
         if (usuarioLogin != null) {
             boolean match = false;
             String pass = txtPassword.getText();

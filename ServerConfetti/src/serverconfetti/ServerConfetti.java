@@ -7,8 +7,8 @@ package serverconfetti;
 
 import controladores.EmisionJpaController;
 import controladores.PreguntaJpaController;
-import controladores.exceptions.IllegalOrphanException;
-import controladores.exceptions.NonexistentEntityException;
+import controladores.exception.IllegalOrphanException;
+import controladores.exception.NonexistentEntityException;
 import entitites.Pregunta;
 import entitites.Emision;
 import interfacesconfetti.ICliente;
@@ -26,9 +26,13 @@ import java.util.logging.Logger;
  * 
  * @author Paola
  */
+
 public class ServerConfetti extends UnicastRemoteObject implements IServer {
 
     private final List<ICliente> clientes;
+
+    private List<Pregunta> preguntas;
+
 
     private void init() throws RemoteException {
         try {
@@ -70,6 +74,8 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
     public int registrarCallbackCliente(ICliente cliente) throws RemoteException {
         if (!clientes.contains(cliente)) {
             clientes.add(cliente);
+            System.out.println("Cliente conectado:" + clientes.size());
+            
         }
         return clientes.indexOf(cliente);
     }
@@ -80,7 +86,11 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
  */
     @Override
     public void deregistrarCallbackCliente(ICliente cliente) throws RemoteException {
-        clientes.remove(cliente);
+        if(clientes.contains(cliente)) {
+            clientes.remove(cliente);
+            System.out.println("Cliente desconectado: " + clientes.size());
+        }
+        
     }
 /**
  * 
@@ -90,6 +100,7 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
  */
     @Override
     public void notificarPuntaje(int puntaje, int idCliente) throws RemoteException {
+
       
     }
     /**
@@ -97,6 +108,7 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
      * @param nuevaEmision
      * @throws RemoteException 
      */
+
     @Override
     public void anadirEmision(Emision nuevaEmision) throws RemoteException {
         EmisionJpaController ejm = new EmisionJpaController();
@@ -155,8 +167,12 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
     public void eliminarEmision(int id) throws RemoteException{
         EmisionJpaController ejm = new EmisionJpaController() ;
         try {
-            ejm.destroy(id);
-        } catch (IllegalOrphanException | NonexistentEntityException ex) {
+            try {
+                ejm.destroy(id);
+            } catch (IllegalOrphanException ex) {
+                Logger.getLogger(ServerConfetti.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (NonexistentEntityException ex) {
             Logger.getLogger(ServerConfetti.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -176,6 +192,23 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
         } catch (Exception ex) {
             Logger.getLogger(ServerConfetti.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public List<Pregunta> recuperarPreguntas() throws RemoteException {
+   
+        EmisionJpaController ejc = new EmisionJpaController();
+        List<Emision> listaEmison = ejc.findEmisionEntities();
+        Emision proxima = null;
+
+        for (Emision emision : listaEmison) {
+            proxima = emision;
+        }
+
+        Emision emision = ejc.findEmision(proxima.getIdemision());
+        preguntas = emision.getPreguntaList();
+        System.out.println(preguntas.size());
+        return preguntas;
     }
 
 }

@@ -1,10 +1,11 @@
 package GUI;
 
+import RMI.Cliente;
 import controladores.EmisionJpaController;
-import entitites.Emision;
 import entitites.Pregunta;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -125,15 +126,17 @@ public class FXMLEmisionController implements Initializable {
     Thread thread = new Thread(() -> {
       int numeroPregunta = 1;
       for (Pregunta p : preguntas) {
+        enableButtons();
         try {
           enableButtons();
           setQuestion(p, numeroPregunta);
           setRemainingTime(numeroPregunta);
-          
+
           Thread.sleep(5000);
           numeroPregunta++;
         } catch (InterruptedException ex) {
           Logger.getLogger(FXMLEmisionController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error en: recuperar preguntas");
         }
       }
       Platform.runLater(() -> {
@@ -144,6 +147,7 @@ public class FXMLEmisionController implements Initializable {
   }
 
   private void setQuestion(Pregunta p, int numero) {
+
     Platform.runLater(() -> {
       numeroPregunta.setText(String.valueOf(numero));
       lbPregunta.setText(p.getPregunta());
@@ -153,7 +157,7 @@ public class FXMLEmisionController implements Initializable {
     });
   }
 
-  private void setRemainingTime(int numeroPregunta) {
+  public void setRemainingTime(int numeroPregunta) {
     double progress = 0;
     for (int i = 0; i <= 1000; i++) {
       try {
@@ -165,6 +169,7 @@ public class FXMLEmisionController implements Initializable {
       }
     }
     disableButtons();
+
     if (numeroPregunta < preguntas.size()) {
       Platform.runLater(() -> {
         lbPregunta.setText("Cambiando a siguiente pregunta, espera un momento...");
@@ -178,22 +183,15 @@ public class FXMLEmisionController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle rb) {
 
-    remaininTime.setStyle("-fx-accent: black;");
-    
-    List<Emision> listaEmison = ejc.findEmisionEntities();
-    Emision proxima = null;
-    
-    for(Emision emision : listaEmison) {
-      proxima = emision;
+    try {
+      preguntas = Cliente.server.recuperarPreguntas();
+    } catch (RemoteException ex) {
+      Logger.getLogger(FXMLEmisionController.class.getName()).log(Level.SEVERE, null, ex);
     }
-
-    Emision emision = ejc.findEmision(proxima.getIdemision());
-    preguntas = emision.getPreguntaList();
-    if(preguntas.size() > 0) {
+    if (preguntas.size() > 0) {
       startGame();
     } else {
       lbPregunta.setText("No hay preguntas para esta emisión");
     }
-
   }
 }

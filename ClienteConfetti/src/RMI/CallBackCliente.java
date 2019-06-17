@@ -17,37 +17,25 @@ import java.util.List;
  */
 public class CallBackCliente extends UnicastRemoteObject implements ICliente {
 
-  List<Pregunta> preguntas;
+    List<Pregunta> preguntas;
 
+    public CallBackCliente() throws RemoteException {
+        super();
+    }
 
-  public CallBackCliente() throws RemoteException {
-    super();
-  }
+    @Override
+    public void iniciarJuego() throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-/**
- * 
- * @throws RemoteException 
- */
-  @Override
-  public void iniciarJuego() throws RemoteException {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-  }
-/**
- * 
- * @param pregunta
- * @throws RemoteException 
- */
-  @Override
-  public void setPregunta(Pregunta pregunta) throws RemoteException {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-  }
-/**
- * 
- * @param remainingTime
- * @throws RemoteException 
- */
-  @Override
-  public void setRemainingTime(double remainingTime) throws RemoteException {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-  }
+    @Override
+    public void setRemainingTime(double remainingTime) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setPregunta(Pregunta pregunta, int numeroPregunta) throws RemoteException {
+        
+    }
+
 }

@@ -6,9 +6,7 @@
 package interfacesconfetti;
 
 import entitites.Pregunta;
-
 import entitites.Emision;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -39,4 +37,7 @@ public interface IServer extends Remote {
     public void eliminarEmision(int id) throws RemoteException;
     
     public void editarEmision(Emision emision) throws RemoteException;
+    
+    public List<Pregunta> recuperarPreguntas() throws RemoteException;
+
 }
