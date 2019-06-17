@@ -153,7 +153,7 @@ public class FXMLEmisionController implements Initializable {
       lbPregunta.setText(p.getPregunta());
       firstAnswer.setText(p.getRespuestafalsa1());
       secondAnswer.setText(p.getRespuestafalsa2());
-      thirdAnswer.setText(p.getRespuestafalsa3());
+      thirdAnswer.setText(p.getRespuestacorrecta());
     });
   }
 
