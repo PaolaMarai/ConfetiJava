@@ -38,7 +38,7 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
     private final List<ICliente> clientes;
     private List<Pregunta> preguntas;
     private EmisionJpaController ejc = new EmisionJpaController();
-    
+    private Emision emisionSeleccionada;
 
 
     private void init() throws RemoteException {
@@ -250,7 +250,7 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
     }
     
     String fechaEmision = emision.getFecha() + " " + emision.getHorainicio();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
     Date fechaE = null;
     try {
       fechaE = sdf.parse(fechaEmision);
@@ -266,4 +266,16 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
         UsuarioCRUD ucd = new UsuarioCRUD();
         return ucd.buscarUsuarioPorTelefono(telefono);
     }
+
+    @Override
+    public void getEmision(Emision e) throws RemoteException {
+        this.emisionSeleccionada = e;
+    }
+
+    @Override
+    public Emision setEmiision() throws RemoteException {
+        return emisionSeleccionada;
+    }
+
+   
 }
