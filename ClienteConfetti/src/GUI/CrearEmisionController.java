@@ -75,11 +75,13 @@ public class CrearEmisionController implements Initializable {
     }
 
     @FXML
+
     private void crearEmision(ActionEvent event) throws RemoteException, IOException {
         Emision emision = new Emision();
         String date = this.dateField.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         String inicio = this.inicioHoraField.getValue() + ":" + this.inicioMinutosField.getValue() + ":00";
         String fin = this.finHoraField.getValue() + ":" + this.finMinutosField.getValue() + ":00";
+
         System.out.println(inicio);
 
         emision.setFecha(date);

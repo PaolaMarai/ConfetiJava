@@ -7,8 +7,10 @@ package interfacesconfetti;
 
 import entitites.Pregunta;
 import entitites.Emision;
+import entitites.Usuario;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,5 +41,21 @@ public interface IServer extends Remote {
     public void editarEmision(Emision emision) throws RemoteException;
     
     public List<Pregunta> recuperarPreguntas() throws RemoteException;
+
+    
+    public List<Emision> buscarTodasEmision() throws RemoteException;
+    
+    //Peticiones de usuario
+    public boolean agregarUsuarioSe(Usuario usuario) throws RemoteException;
+    
+    public Usuario buscarUsuarioPorUsuarioSe(String user) throws RemoteException;
+    
+    public Usuario buscarUsuarioPorCorreoSe(String correo) throws RemoteException;
+    
+    public Usuario buscarUsuaroPorTelefonoSe(String telefono) throws RemoteException;
+    //Terminan peticiones de usuario
+    
+    public Date getFecha() throws RemoteException;
+
 
 }

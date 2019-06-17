@@ -227,5 +227,4 @@ public class EmisionJpaController implements Serializable {
             em.close();
         }
     }
-    
 }
