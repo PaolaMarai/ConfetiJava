@@ -59,9 +59,9 @@ public class FXMLInicioSesionController implements Initializable {
                     //ir a emisiones programadas
                 } else {
                     if(isEmisionActive()) {
-                        //ir a emision
+                        cargarPantallaEmision();
                     } else {
-                        //ir a contador
+                        cargarPantallaContadorEmision();
                     }
                     
                 }
@@ -125,6 +125,54 @@ public class FXMLInicioSesionController implements Initializable {
         stage.setResizable(false);
         stage.show();
         
+    }
+    
+    @FXML
+    public void cargarPantallaEmision() {
+      Stage stage = new Stage();
+      try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUI/FXMLEmision.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+      } catch (IOException ex) {
+        Logger.getLogger(FXMLInicioSesionController.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }
+    
+    @FXML
+    public void cargarPantallaContadorEmision() {
+      Stage stage = new Stage();
+      try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUI/FXMLCountDown.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+      } catch (IOException ex) {
+        Logger.getLogger(FXMLInicioSesionController.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }
+    
+    @FXML
+    public void cargarPantallaAdministrarEmision() {
+      Stage stage = new Stage();
+      try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUI/FXMLInicioSesion.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+      } catch (IOException ex) {
+        Logger.getLogger(FXMLInicioSesionController.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }
     
     public void closeButtonAction() {

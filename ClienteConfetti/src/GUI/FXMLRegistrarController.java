@@ -108,8 +108,7 @@ public class FXMLRegistrarController implements Initializable {
                     Logger.getLogger(FXMLRegistrarController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 enviarCorreoValidacion();
-                
-                
+                cargarPantallaIniciarSesion();
             }
         }
     }
@@ -176,6 +175,8 @@ public class FXMLRegistrarController implements Initializable {
     
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
