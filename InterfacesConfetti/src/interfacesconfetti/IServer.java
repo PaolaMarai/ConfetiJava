@@ -10,6 +10,7 @@ import entitites.Emision;
 import entitites.Usuario;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,5 +45,8 @@ public interface IServer extends Remote {
     
     public Usuario buscarUsuaroPorTelefonoSe(String telefono) throws RemoteException;
     //Terminan peticiones de usuario
+    
+    public Date getFecha() throws RemoteException;
+
 
 }

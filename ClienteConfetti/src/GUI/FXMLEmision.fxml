@@ -18,7 +18,7 @@
                   <Font name="Arial Italic" size="30.0" />
                </font>
             </Label>
-            <Button fx:id="btnSignOff" layoutX="506.0" layoutY="32.0" mnemonicParsing="false" onAction="#cargarPantallaIniciarSesion" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #6108e6; -fx-background-radius: 10px;" text="Cerrar sesión" underline="true" />
+            <Button fx:id="btnSignOff" layoutX="506.0" layoutY="32.0" mnemonicParsing="false" onAction="#signOff" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #6108e6; -fx-background-radius: 10px;" text="Cerrar sesión" underline="true" />
             <ImageView fitHeight="67.0" fitWidth="64.0" layoutX="657.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/usuario.png" />
