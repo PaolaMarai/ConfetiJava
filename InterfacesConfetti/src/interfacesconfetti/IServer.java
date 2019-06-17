@@ -31,8 +31,17 @@ public interface IServer extends Remote {
     public void validarRespuesta(String respuesta) throws RemoteException;
 
     public void anadirEmision(Emision nuevaEmision) throws RemoteException;
+
+    public List<Emision> obtenerEmisiones() throws RemoteException;
+    
+    public Emision obtenerEmision(int id) throws RemoteException;
+    
+    public void eliminarEmision(int id) throws RemoteException;
+    
+    public void editarEmision(Emision emision) throws RemoteException;
     
     public List<Pregunta> recuperarPreguntas() throws RemoteException;
+
     
     public List<Emision> buscarTodasEmision() throws RemoteException;
     

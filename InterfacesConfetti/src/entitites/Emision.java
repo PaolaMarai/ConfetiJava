@@ -61,14 +61,27 @@ public class Emision implements Serializable {
     private int enemision;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idemision")
     private List<Pregunta> preguntaList;
-
+/**
+ * Constructor de la entidad emision
+ */
     public Emision() {
     }
-
+/**
+ * 
+ * @param idemision 
+ */
     public Emision(Integer idemision) {
         this.idemision = idemision;
     }
-
+/**
+ * 
+ * @param idemision
+ * @param fecha
+ * @param fechafin
+ * @param horainicio
+ * @param horafin
+ * @param enemision 
+ */
     public Emision(Integer idemision, String fecha, String fechafin, String horainicio, String horafin, int enemision) {
         this.idemision = idemision;
         this.fecha = fecha;
@@ -77,71 +90,121 @@ public class Emision implements Serializable {
         this.horafin = horafin;
         this.enemision = enemision;
     }
-
+/**
+ * 
+ * @return 
+ */
     public Integer getIdemision() {
         return idemision;
     }
-
+/**
+ * 
+ * @param idemision 
+ */
     public void setIdemision(Integer idemision) {
         this.idemision = idemision;
     }
-
+/**
+ * 
+ * @return 
+ */
     public String getFecha() {
         return fecha;
     }
-
+/**
+ * 
+ * 
+ * @param fecha 
+ */
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-
+/**
+ * 
+ * @return 
+ */
     public String getFechafin() {
         return fechafin;
     }
-
+/**
+ * 
+ * @param fechafin 
+ */
     public void setFechafin(String fechafin) {
         this.fechafin = fechafin;
     }
-
+/**
+ * 
+ * @return 
+ */
     public String getHorainicio() {
         return horainicio;
     }
-
+/**
+ * 
+ * @param horainicio 
+ */
     public void setHorainicio(String horainicio) {
         this.horainicio = horainicio;
     }
-
+/**
+ * 
+ * @return 
+ */
     public String getHorafin() {
         return horafin;
     }
-
+/**
+ * 
+ * @param horafin 
+ */
     public void setHorafin(String horafin) {
         this.horafin = horafin;
     }
-
+/**
+ * 
+ * @return 
+ */
     public int getEnemision() {
         return enemision;
     }
-
+/**
+ * 
+ * @param enemision 
+ */
     public void setEnemision(int enemision) {
         this.enemision = enemision;
     }
-
+/**
+ * 
+ * @return 
+ */
     @XmlTransient
     public List<Pregunta> getPreguntaList() {
         return preguntaList;
     }
-
+/**
+ * 
+ * @param preguntaList 
+ */
     public void setPreguntaList(List<Pregunta> preguntaList) {
         this.preguntaList = preguntaList;
     }
-
+/**
+ * 
+ * @return 
+ */
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (idemision != null ? idemision.hashCode() : 0);
         return hash;
     }
-
+/**
+ * 
+ * @param object
+ * @return 
+ */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -154,7 +217,10 @@ public class Emision implements Serializable {
         }
         return true;
     }
-
+/**
+ * 
+ * @return 
+ */
     @Override
     public String toString() {
         return "entitites.Emision[ idemision=" + idemision + " ]";

@@ -26,7 +26,9 @@ import javax.persistence.Persistence;
  * @author Paola
  */
 public class EmisionJpaController implements Serializable {
-
+/**
+ * 
+ */
     public EmisionJpaController() {
         this.emf = Persistence.createEntityManagerFactory("InterfacesConfettiPU");
     }
@@ -35,7 +37,10 @@ public class EmisionJpaController implements Serializable {
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-
+/**
+ * 
+ * @param emision 
+ */
     public void create(Emision emision) {
         if (emision.getPreguntaList() == null) {
             emision.setPreguntaList(new ArrayList<Pregunta>());
@@ -67,7 +72,13 @@ public class EmisionJpaController implements Serializable {
             }
         }
     }
-
+/**
+ * 
+ * @param emision
+ * @throws IllegalOrphanException
+ * @throws NonexistentEntityException
+ * @throws Exception 
+ */
     public void edit(Emision emision) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
@@ -123,7 +134,12 @@ public class EmisionJpaController implements Serializable {
             }
         }
     }
-
+/**
+ * 
+ * @param id
+ * @throws IllegalOrphanException
+ * @throws NonexistentEntityException 
+ */
     public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -155,7 +171,10 @@ public class EmisionJpaController implements Serializable {
             }
         }
     }
-
+/**
+ * 
+ * @return Lista de emisiones
+ */
     public List<Emision> findEmisionEntities() {
         return findEmisionEntities(true, -1, -1);
     }
@@ -179,7 +198,11 @@ public class EmisionJpaController implements Serializable {
             em.close();
         }
     }
-
+/**
+ * 
+ * @param id
+ * @return 
+ */
     public Emision findEmision(Integer id) {
         EntityManager em = getEntityManager();
         try {
@@ -188,7 +211,10 @@ public class EmisionJpaController implements Serializable {
             em.close();
         }
     }
-
+/**
+ * 
+ * @return 
+ */
     public int getEmisionCount() {
         EntityManager em = getEntityManager();
         try {

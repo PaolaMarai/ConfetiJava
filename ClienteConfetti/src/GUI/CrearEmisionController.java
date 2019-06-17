@@ -7,21 +7,22 @@ package GUI;
 
 import RMI.Cliente;
 import entitites.Emision;
-import entitites.Pregunta;
+import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -30,8 +31,6 @@ import javafx.scene.control.SpinnerValueFactory;
  */
 public class CrearEmisionController implements Initializable {
 
-    @FXML
-    private Button buttonCerrarSesion;
     @FXML
     private DatePicker dateField;
     @FXML
@@ -48,7 +47,9 @@ public class CrearEmisionController implements Initializable {
     private Button crearEminisonButton;
 
     /**
-     * Initializes the controller class.
+     * Se inicia la pantalla de crear emision.
+     * @param url
+     * @param rb 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -71,34 +72,39 @@ public class CrearEmisionController implements Initializable {
         this.montoField.setEditable(true);
         this.finMinutosField.setEditable(true);
         this.inicioMinutosField.setEditable(true);
-    }    
-
-    @FXML
-    private void cerrarSesion(ActionEvent event) {
-         try {
-            Cliente.server.deregistrarCallbackCliente(Cliente.callBackCliente);
-        } catch (RemoteException ex) {
-            Logger.getLogger(CrearEmisionController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     @FXML
-    private void crearEmision(ActionEvent event) throws RemoteException {
-       Emision emision = new Emision();
-       String date = this.dateField.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-       String inicio = this.inicioHoraField.getValue() + ":" + this.inicioMinutosField.getValue() +":00";
-       String fin = this.finHoraField.getValue() + ":" + this.finMinutosField.getValue() + ":00";
-       List<Pregunta> preguntaList = null;
+
+    private void crearEmision(ActionEvent event) throws RemoteException, IOException {
+        Emision emision = new Emision();
+        String date = this.dateField.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        String inicio = this.inicioHoraField.getValue() + ":" + this.inicioMinutosField.getValue() + ":00";
+        String fin = this.finHoraField.getValue() + ":" + this.finMinutosField.getValue() + ":00";
+
         System.out.println(inicio);
-       
-       emision.setFecha(date);
-       emision.setFechafin(date);
-       emision.setHorafin(fin);
-       emision.setHorainicio(inicio);
-       emision.setEnemision(0);
-       //emision.setPreguntaList(preguntaList);
- 
-       Cliente.server.anadirEmision(emision);
-       
+
+        emision.setFecha(date);
+        emision.setFechafin(date);
+        emision.setHorafin(fin);
+        emision.setHorainicio(inicio);
+        emision.setEnemision(0);
+
+        Cliente.server.anadirEmision(emision);
+        this.abrirVentana("EmisionesCRUD.fxml");
+        this.cerrarVentana(crearEminisonButton);
+    }
+
+    private void abrirVentana(String ventana) throws IOException {
+        Stage stage = new Stage();
+        Parent pane = FXMLLoader.load(getClass().getResource(ventana));
+        Scene scene = new Scene(pane);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void cerrarVentana(Button boton) {
+        Stage stage = (Stage) boton.getScene().getWindow();
+        stage.close();
     }
 }
