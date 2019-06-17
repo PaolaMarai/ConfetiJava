@@ -49,7 +49,7 @@
             <Font name="Candara Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="buttonPregunta" layoutX="323.0" layoutY="347.0" mnemonicParsing="false" style="-fx-background-color: #3311bb; -fx-background-radius: 10;" text="Añadir Preguntas" textFill="#fff12b">
+      <Button fx:id="buttonPregunta" onAction="#agregarPreguntas" layoutX="323.0" layoutY="347.0" mnemonicParsing="false" style="-fx-background-color: #3311bb; -fx-background-radius: 10;" text="Añadir Preguntas" textFill="#fff12b">
          <font>
             <Font name="Candara Bold" size="14.0" />
          </font>

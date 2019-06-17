@@ -56,6 +56,9 @@ public interface IServer extends Remote {
     //Terminan peticiones de usuario
     
     public Date getFecha() throws RemoteException;
-
+    
+    public void getEmision(Emision e) throws RemoteException;
+    
+    public Emision setEmiision() throws RemoteException;
 
 }
