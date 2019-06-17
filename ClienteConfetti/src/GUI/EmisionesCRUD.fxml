@@ -9,29 +9,45 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #26294a;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CrearEmisionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #26294a;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.EmisionesCRUDController">
    <children>
       <Label prefHeight="69.0" prefWidth="600.0" style="-fx-background-color: #1a1334;" text="    Confetti" textFill="#ed0345">
          <font>
             <Font name="Gabriola" size="47.0" />
          </font>
       </Label>
-      <ImageView fitHeight="59.0" fitWidth="62.0" layoutX="512.0" layoutY="5.0" pickOnBounds="true">
+      <ImageView fitHeight="49.0" fitWidth="52.0" layoutX="521.0" layoutY="10.0" pickOnBounds="true">
          <image>
             <Image url="@img/usuario.png" />
          </image>
       </ImageView>
-      <Button fx:id="buttonCerrarSesion" layoutX="428.0" layoutY="14.0" mnemonicParsing="false" onAction="#cerrarSesion" style="-fx-background-color: #110141; -fx-background-radius: 10;" text="Cerrar sesión" textFill="#ef6a32">
+      <Button fx:id="buttonCerrarSesion" layoutX="426.0" layoutY="22.0" mnemonicParsing="false" onAction="#cerrarSesion" style="-fx-background-color: #110141; -fx-background-radius: 10;" text="Cerrar sesión" textFill="#ef6a32">
          <font>
             <Font name="Georgia" size="13.0" />
          </font>
       </Button>
-      <TableView layoutX="37.0" layoutY="121.0" prefHeight="233.0" prefWidth="526.0" style="-fx-background-color: #88639a;">
+      <TableView fx:id="tablaEmisiones" layoutX="37.0" layoutY="93.0" prefHeight="233.0" prefWidth="526.0" style="-fx-background-color: #f4d4f1;">
         <columns>
-          <TableColumn prefWidth="210.0" style="-fx-background-color: #fbbf45;" text="Fecha" />
-          <TableColumn prefWidth="155.0" style="-fx-background-color: #aad962;" text="Hora de inicio" />
-            <TableColumn prefWidth="160.0" style="-fx-background-color: #03c383;" text="Hora de Fin" />
+            <TableColumn fx:id="idEmision" prefWidth="75.0" style="-fx-background-color: #fff12b;" text="ID" />
+          <TableColumn fx:id="columnFecha" prefWidth="210.0" style="-fx-background-color: #fbbf45;" text="Fecha" />
+          <TableColumn fx:id="columnInicio" prefWidth="125.0" style="-fx-background-color: #aad962;" text="Hora de inicio" />
+            <TableColumn fx:id="columnFin" prefWidth="115.0" style="-fx-background-color: #03c383;" text="Hora de Fin" />
         </columns>
       </TableView>
+      <Button fx:id="buttonNuevo" layoutX="454.0" layoutY="347.0" mnemonicParsing="false" onAction="#nuevaEmision" style="-fx-background-color: #11aabb; -fx-background-radius: 10;" text="Nueva Emision" textFill="#fffc5a">
+         <font>
+            <Font name="Candara Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonBorrar" layoutX="37.0" layoutY="347.0" mnemonicParsing="false" onAction="#remover" style="-fx-background-radius: 10; -fx-background-color: #f80c12;" text="Cancelar Emision" textFill="#fffc5a">
+         <font>
+            <Font name="Candara Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonEditar" layoutX="225.0" layoutY="347.0" mnemonicParsing="false" onAction="#editar" style="-fx-background-radius: 10; -fx-background-color: #710162;" text="Reprogramar Emision" textFill="#fffc5a">
+         <font>
+            <Font name="Candara Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

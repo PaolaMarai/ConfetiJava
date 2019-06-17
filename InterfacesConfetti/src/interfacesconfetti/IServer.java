@@ -11,6 +11,7 @@ import entitites.Emision;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 /**
  *
@@ -31,4 +32,11 @@ public interface IServer extends Remote {
 
     public void anadirEmision(Emision nuevaEmision) throws RemoteException;
 
+    public List<Emision> obtenerEmisiones() throws RemoteException;
+    
+    public Emision obtenerEmision(int id) throws RemoteException;
+    
+    public void eliminarEmision(int id) throws RemoteException;
+    
+    public void editarEmision(Emision emision) throws RemoteException;
 }

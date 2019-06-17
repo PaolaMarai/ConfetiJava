@@ -7,6 +7,8 @@ package serverconfetti;
 
 import controladores.EmisionJpaController;
 import controladores.PreguntaJpaController;
+import controladores.exceptions.IllegalOrphanException;
+import controladores.exceptions.NonexistentEntityException;
 import entitites.Pregunta;
 import entitites.Emision;
 import interfacesconfetti.ICliente;
@@ -18,11 +20,12 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ServerConfetti extends UnicastRemoteObject implements IServer {
 
     private final List<ICliente> clientes;
-    
 
     private void init() throws RemoteException {
         try {
@@ -41,6 +44,7 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
     public ServerConfetti() throws RemoteException {
         super();
         clientes = new ArrayList<>();
+        
     }
 
     public static void main(String[] args) throws RemoteException {
@@ -79,7 +83,45 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
 
     @Override
     public void validarRespuesta(String respuesta) throws RemoteException {
+        
+    }
 
+    @Override
+    public List<Emision> obtenerEmisiones() throws RemoteException{
+        EmisionJpaController ejm = new EmisionJpaController();
+        List<Emision> emisiones = new ArrayList();
+        emisiones = ejm.findEmisionEntities();
+        return emisiones;
+    }
+
+    @Override
+    public Emision obtenerEmision(int id) throws RemoteException{
+        EmisionJpaController ejm = new EmisionJpaController();
+        Emision emision = ejm.findEmision(id);
+        return emision;
+    }
+
+    @Override
+    public void eliminarEmision(int id) throws RemoteException{
+        EmisionJpaController ejm = new EmisionJpaController() ;
+        try {
+            ejm.destroy(id);
+        } catch (IllegalOrphanException | NonexistentEntityException ex) {
+            Logger.getLogger(ServerConfetti.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void editarEmision(Emision emision) throws RemoteException{
+        EmisionJpaController ejm = new EmisionJpaController();
+        try {
+            ejm.edit(emision);
+            
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ServerConfetti.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ServerConfetti.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
