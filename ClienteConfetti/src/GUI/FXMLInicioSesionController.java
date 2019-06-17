@@ -129,7 +129,7 @@ public class FXMLInicioSesionController implements Initializable {
     stage.setScene(scene);
     stage.setResizable(false);
     stage.show();
-
+    closeButtonAction();
   }
 
   @FXML
