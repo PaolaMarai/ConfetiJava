@@ -5,9 +5,11 @@
  */
 package GUI;
 
+import RMI.Cliente;
 import Utilities.PasswordUtils;
 import entitites.Usuario;
 import interfacesconfetti.UsuarioCRUD;
+import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.security.NoSuchAlgorithmException;
@@ -18,12 +20,16 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.stage.Stage;
 
 
 /**
@@ -57,7 +63,7 @@ public class FXMLRegistrarController implements Initializable {
     private Button btnRegistrar; 
     
     @FXML
-    private Button btnInicio;
+    private Button btnLogin;
     
     @FXML
     private Label lblError;
@@ -96,15 +102,13 @@ public class FXMLRegistrarController implements Initializable {
                 usuarioAgregar.setTelefono(txtTelefono.getText());
                 usuarioAgregar.setAutenticado(0);
                 usuarioAgregar.setClave(passwordAsegurada);
-                UsuarioCRUD us = new UsuarioCRUD();
                 try {
-                    us.agregarUsuario(usuarioAgregar);
+                    Cliente.server.agregarUsuarioSe(usuarioAgregar);
                 } catch (RemoteException ex) {
                     Logger.getLogger(FXMLRegistrarController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 enviarCorreoValidacion();
-                
-                
+                cargarPantallaIniciarSesion();
             }
         }
     }
@@ -138,13 +142,11 @@ public class FXMLRegistrarController implements Initializable {
     public String existeUsuario() throws RemoteException {
         String errores = "";
         
-        UsuarioCRUD us = new UsuarioCRUD();
-        
-        if(us.buscarUsuarioPorUsuario(txtUsuario.getText()) != null) {
+        if(Cliente.server.buscarUsuarioPorUsuarioSe(txtUsuario.getText()) != null) {
             errores = errores + "El usuario ya está registrado\n";
-        } else if(us.buscarUsuarioPorCorreo(txtCorreo.getText()) != null) {
+        } else if(Cliente.server.buscarUsuarioPorCorreoSe(txtCorreo.getText()) != null) {
             errores = errores + "El correo ya está registrado\n";
-        } else if(us.buscarUsuarioPorTelefono(txtTelefono.getText()) != null) {
+        } else if(Cliente.server.buscarUsuaroPorTelefonoSe(txtTelefono.getText()) != null) {
             errores = errores + "El telefono ya está registrado\n";
         }
         
@@ -155,8 +157,26 @@ public class FXMLRegistrarController implements Initializable {
         
     }
     
+    @FXML
+    public void cargarPantallaIniciarSesion() {
+      Stage stage = new Stage();
+      try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUI/FXMLInicioSesion.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+      } catch (IOException ex) {
+        Logger.getLogger(FXMLCountDownController.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }
+    
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
