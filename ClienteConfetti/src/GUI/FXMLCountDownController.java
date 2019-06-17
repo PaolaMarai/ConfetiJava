@@ -1,16 +1,11 @@
 package GUI;
 
-import entitites.Emision;
-import controladores.EmisionCRUD;
+import RMI.Cliente;
 import controladores.EmisionJpaController;
-
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.rmi.RemoteException;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -44,7 +39,7 @@ public class FXMLCountDownController implements Initializable {
   private Label remainingMinutes;
   @FXML
   private Label remainingSeconds;
-  
+
   private final EmisionJpaController ejc = new EmisionJpaController();
 
   @FXML
@@ -114,41 +109,17 @@ public class FXMLCountDownController implements Initializable {
   }
 
   /**
-   * Valida si hay una transmión actual para saber qué ventana mostrar cuando un usuario inicia
-   * sesión.
-   *
-   * @return El estado de la transmisión.
-   */
-  public boolean enEmision() {
-
-    return false;
-  }
-
-  private Date formatearFecha() {
-    List<Emision> listaEmison = ejc.findEmisionEntities();
-    Emision emision = null;
-    for(Emision e : listaEmison) {
-      emision = e;
-    }
-    String fechaEmision = emision.getFecha() + " " + emision.getHorainicio();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-    Date fechaE = null;
-    try {
-      fechaE = sdf.parse(fechaEmision);
-    } catch (ParseException ex) {
-      Logger.getLogger(FXMLCountDownController.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    
-    return fechaE;
-  }
-
-  /**
    * Initializes the controller class.
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    Date proximaEmision = formatearFecha();
-    doCountDown(proximaEmision);
+    Date proximaEmision;
+    try {
+      proximaEmision = Cliente.server.getFecha();
+      doCountDown(proximaEmision);
 
+    } catch (RemoteException ex) {
+      Logger.getLogger(FXMLCountDownController.class.getName()).log(Level.SEVERE, null, ex);
+    }
   }
 }

@@ -37,4 +37,5 @@ public class CallBackCliente extends UnicastRemoteObject implements ICliente {
     public void setPregunta(Pregunta pregunta, int numeroPregunta) throws RemoteException {
         
     }
+
 }
