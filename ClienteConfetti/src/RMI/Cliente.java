@@ -21,7 +21,7 @@ public class Cliente extends Application {
 
     private static final int PORT = 3333;
     private static final String NAMESERVICE = "ConfettiServer";
-    private static final String HOSTNAMESERVER = "192.168.43.99";
+    private static final String HOSTNAMESERVER = "localhost";
 
     public static IServer server;
     public static CallBackCliente callBackCliente;
@@ -42,7 +42,7 @@ public class Cliente extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/FXMLEmision.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/FXMLCountDown.fxml"));
 
         Scene scene = new Scene(root);
 

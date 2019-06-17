@@ -16,12 +16,19 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ServerConfetti extends UnicastRemoteObject implements IServer {
 
     private final List<ICliente> clientes;
+    private List<Pregunta> preguntas;
+    private EmisionJpaController ejc = new EmisionJpaController();
     
 
     private void init() throws RemoteException {
@@ -83,8 +90,39 @@ public class ServerConfetti extends UnicastRemoteObject implements IServer {
     }
 
   @Override
-  public void recuperarPreguntas() throws RemoteException {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  public List<Pregunta> recuperarPreguntas() throws RemoteException {
+    ejc = new EmisionJpaController();
+        List<Emision> listaEmison = ejc.findEmisionEntities();
+        Emision proxima = null;
+
+        for (Emision emision : listaEmison) {
+            proxima = emision;
+        }
+
+        Emision emision = ejc.findEmision(proxima.getIdemision());
+        preguntas = emision.getPreguntaList();
+        System.out.println(preguntas.size());
+        return preguntas;
+  }
+
+  @Override
+  public Date getFecha() throws RemoteException {
+    List<Emision> listaEmison = ejc.findEmisionEntities();
+    Emision emision = null;
+    for(Emision e : listaEmison) {
+      emision = e;
+    }
+    
+    String fechaEmision = emision.getFecha() + " " + emision.getHorainicio();
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+    Date fechaE = null;
+    try {
+      fechaE = sdf.parse(fechaEmision);
+    } catch (ParseException ex) {
+      Logger.getLogger(ServerConfetti.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+    return fechaE;
   }
 
 }

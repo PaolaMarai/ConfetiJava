@@ -174,6 +174,15 @@ public class FXMLEmisionController implements Initializable {
       });
     }
   }
+  
+  public void signOff() {
+    try {
+      Cliente.server.deregistrarCallbackCliente(Cliente.callBackCliente);
+      closeButtonAction();
+    } catch (RemoteException ex) {
+      Logger.getLogger(FXMLEmisionController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
 
   /**
    * Initializes the controller class.
@@ -189,6 +198,7 @@ public class FXMLEmisionController implements Initializable {
     if (preguntas.size() > 0) {
       startGame();
     } else {
+      disableButtons();
       lbPregunta.setText("No hay preguntas para esta emisión");
     }
 

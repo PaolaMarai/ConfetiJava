@@ -9,6 +9,7 @@ import entitites.Pregunta;
 import entitites.Emision;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,5 +32,7 @@ public interface IServer extends Remote {
     public void anadirEmision(Emision nuevaEmision) throws RemoteException;
     
     public List<Pregunta> recuperarPreguntas() throws RemoteException;
+    
+    public Date getFecha() throws RemoteException;
 
 }
