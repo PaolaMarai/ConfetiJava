@@ -1,15 +1,11 @@
 package GUI;
 
 import RMI.Cliente;
-import entitites.Emision;
 import controladores.EmisionJpaController;
 import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -110,17 +106,6 @@ public class FXMLCountDownController implements Initializable {
       }
     };
     timer.schedule(tarea, 0, 1000);
-  }
-
-  /**
-   * Valida si hay una transmión actual para saber qué ventana mostrar cuando un usuario inicia
-   * sesión.
-   *
-   * @return El estado de la transmisión.
-   */
-  public boolean enEmision() {
-
-    return false;
   }
 
   /**
